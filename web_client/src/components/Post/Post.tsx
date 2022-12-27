@@ -2,6 +2,7 @@ import './Feed.css';
 function Feed() {
   return (
     <div className="postWrapper">
+      <div className="postSettings"></div>
       <div className="content">contentxd</div>
       <div className="ReactionsWrapper">
         <div className="likeCount">4</div>

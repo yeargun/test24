@@ -1,14 +1,13 @@
 import Feed from '../components/Feed/Feed';
 import HeaderLeft from '../components/HeaderLeft/HeaderLeft';
-import Navbar from '../components/Navbar';
+import Recommended from '../components/Recommended/Recommended';
 
 function FollowingFeed() {
   return (
     <>
       <HeaderLeft />
       <Feed />
-      {/* <Recommended /> */}
-      <h1>stuf ur following:</h1>
+      <Recommended />
     </>
   );
 }

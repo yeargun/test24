@@ -8,7 +8,7 @@ header {
   top: 0;
   width: 30%;
   height: 100%;
-  background-color: rgb(221, 242, 242);
+  background-color: rgb(237, 252, 252);
 }
 
 .tabs {
@@ -17,6 +17,6 @@ header {
   top: 0;
   width: 50%;
   height: 55%;
-  background-color: rgb(186, 255, 218);
+  background-color: rgb(210, 252, 229);
   float: right;
 }
