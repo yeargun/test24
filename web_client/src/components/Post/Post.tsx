@@ -1,19 +1,22 @@
-import './Feed.css';
-function Feed() {
+import './Post.css';
+function Post({ text, likes, reposts, highlightedComment, username }) {
+  if (!highlightedComment) highlightedComment = 'xd';
   return (
     <div className="postWrapper">
       <div className="postSettings"></div>
-      <div className="content">contentxd</div>
+      <div className="content">{text}</div>
       <div className="ReactionsWrapper">
-        <div className="likeCount">4</div>
-        <div className="repostCount">0</div>
-        <div className="commentCount">1</div>
-        <div className="highlightedComment">Great opinion fr</div>
+        <div className="username">{username}</div>
 
-        <input>enter your opinion</input>
+        <div className="likeCount">{likes}</div>
+        <div className="repostCount">{reposts}</div>
+        <div className="commentCount">1</div>
+        <div className="highlightedComment">{highlightedComment}</div>
+
+        <input type="text" id="comment" name="comment" />
       </div>
     </div>
   );
 }
 
-export default Feed;
+export default Post;

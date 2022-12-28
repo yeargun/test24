@@ -1,12 +1,20 @@
 import './Feed.css';
+import Post from './../Post/Post';
+import recommendedPosts from './../Recommended/RecommendedPosts.json';
 function Feed() {
   return (
     <div className="feedWrapper">
-      <h1>stuf we recommend:</h1>
       <ul>
-        <li>post1</li>
-        <li>post2</li>
-        <li>post3</li>
+        {recommendedPosts.map((post) => (
+          <li key={post.id}>
+            <Post {...post} />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+          </li>
+        ))}
       </ul>
     </div>
   );
