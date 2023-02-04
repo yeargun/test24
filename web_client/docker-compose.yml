@@ -1,0 +1,14 @@
+version: '3'
+services:
+  front:
+    build:
+      context: ./
+    container_name: stuf_react
+    ports:
+      - 5173:5173
+    expose:
+      - 5173
+    stdin_open: true
+    volumes:
+      - ./:usr/src/app/stuf_front
+      - /usr/src/app/stuf_front/node_modules
