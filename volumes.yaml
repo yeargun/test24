@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-auth-pv-volume # Sets PV's name
+  labels:
+    type: local # Sets PV's type to local
+    name: postgres-auth-pv-volume
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi # Sets PV Volume
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-auth-pv-claim # Sets name of PVC
+  labels:
+    name: postgres-auth-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany # Sets read and write access
+  resources:
+    requests:
+      storage: 5Gi # Sets volume size

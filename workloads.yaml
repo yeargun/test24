@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-auth0
+
+spec:
+  selector:
+    matchLabels:
+      name: spring-auth0
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: spring-auth0
+    spec:
+      containers:
+        - name: spring-auth0
+          image: auth-service
+          imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-auth
+
+spec:
+  selector:
+    matchLabels:
+      name: postgres-auth
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: postgres-auth
+    spec:
+      containers:
+        - name: postgres-auth
+          image: postgres
+          imagePullPolicy: "IfNotPresent"
+          envFrom:
+            - configMapRef:
+                name: postgres-auth-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-auth-pv-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: port-show
+
+spec:
+  selector:
+    matchLabels:
+      name: port-show
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: port-show
+    spec:
+      containers:
+        - name: port-show
+          image: port-show
+          imagePullPolicy: Never
