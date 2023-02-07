@@ -24,7 +24,7 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: secret
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://localhost:5432/jwt_security
+              value: spring-auth0/jwt_security
             - name: SPRING_DATASOURCE_USERNAME
               value: root
 ---
