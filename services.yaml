@@ -7,31 +7,20 @@ spec:
     name: spring-auth0
   ports:
     - name: http
-      port: 8081
+      port: 8080
+      targetPort: 8080
   type: ClusterIP
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgesql
+  name: postgresql
 spec:
   selector:
     name: postgres-auth
   ports:
     - name: postgre-auth-port
       port: 5432
-  type: ClusterIP
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: port-show
-spec:
-  selector:
-    name: port-show
-  ports:
-    - name: port-show
-      port: 5010
+      targetPort: 5432
   type: ClusterIP

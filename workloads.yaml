@@ -16,7 +16,17 @@ spec:
       containers:
         - name: spring-auth0
           image: auth-service
-          imagePullPolicy: Never
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8080
+              name: auth-service
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: secret
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://localhost:5432/jwt_security
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -37,6 +47,9 @@ spec:
         - name: postgres-auth
           image: postgres
           imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+              name: postgresql
           envFrom:
             - configMapRef:
                 name: postgres-auth-config
@@ -47,23 +60,3 @@ spec:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-auth-pv-claim
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: port-show
-
-spec:
-  selector:
-    matchLabels:
-      name: port-show
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        name: port-show
-    spec:
-      containers:
-        - name: port-show
-          image: port-show
-          imagePullPolicy: Never
