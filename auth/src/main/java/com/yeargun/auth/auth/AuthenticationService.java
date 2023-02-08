@@ -1,9 +1,6 @@
 package com.yeargun.auth.auth;
 
 import com.yeargun.auth.config.JwtService;
-import com.yeargun.auth.user.Role;
-import com.yeargun.auth.user.User;
-import com.yeargun.auth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

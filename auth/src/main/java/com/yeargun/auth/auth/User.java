@@ -1,4 +1,4 @@
-package com.yeargun.auth.user;
+package com.yeargun.auth.auth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

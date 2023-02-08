@@ -1,5 +1,6 @@
-package com.yeargun.auth.user;
+package com.yeargun.auth.auth;
 
+import com.yeargun.auth.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

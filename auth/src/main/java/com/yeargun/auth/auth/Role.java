@@ -1,4 +1,4 @@
-package com.yeargun.auth.user;
+package com.yeargun.auth.auth;
 
 public enum Role {
     USER,
