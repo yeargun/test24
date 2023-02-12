@@ -1,13 +1,4 @@
-FROM node
+FROM nginx:alpine
 
-WORKDIR /usr/src/app
+COPY dist/ usr/share/nginx/html
 
-# to get cached npm install
-COPY package*.json ./
-RUN npm install 
-
-# COPY . .
-
-EXPOSE 5173
-
-CMD ["npm", "run", "dev"]
