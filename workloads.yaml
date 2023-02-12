@@ -20,10 +20,6 @@ spec:
           ports:
             - containerPort: 8080
               name: auth-service
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 8080
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://127.0.0.1:5432/stuf_db0"
@@ -41,3 +37,27 @@ spec:
       #   - name: cloudsql-instance-credentials
       #     secret:
       #       secretName: cloudsql-instance-credentials
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webappstuf
+
+spec:
+  # minReadySeconds: 30
+  selector:
+    matchLabels:
+      app2: web_app_stuf
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app2: web_app_stuf
+    spec:
+      containers:
+        - name: webappstuf
+          image: web_app_stuf
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 80

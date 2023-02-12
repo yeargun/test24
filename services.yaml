@@ -10,3 +10,22 @@ spec:
       port: 8080
       targetPort: 8080
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webappstuf
+
+spec:
+  # This defines which pods are going to be represented by this service
+  # The service becomes a network endpoint for either other services or
+  # maybe external users to connect to (browser)
+  selector:
+    app2: web_app_stuf
+
+  ports:
+    - name: http
+      port: 5173
+      nodePort: 30081
+
+  type: NodePort
