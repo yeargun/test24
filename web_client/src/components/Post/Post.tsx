@@ -1,5 +1,14 @@
 import './Post.css';
-function Post({ text, likes, reposts, highlightedComment, username }) {
+
+interface Post {
+  text: string;
+  likes: number;
+  reposts: number;
+  username: string;
+  highlightedComment: string;
+}
+
+function Post({ text, likes, reposts, highlightedComment, username }: Post) {
   if (!highlightedComment) highlightedComment = 'xd';
   return (
     <div className="postWrapper">

@@ -7,7 +7,7 @@ function Feed() {
       <ul>
         {recommendedPosts.map((post) => (
           <li key={post.id}>
-            <Post {...post} />
+            <Post highlightedComment={''} {...post} />
             <br />
             <br />
             <br />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Register.css';
+import M from 'materialize-css';
+import axios from 'axios';
 
 function Register() {
   const [fullName, setFullname] = useState('');
@@ -15,25 +16,17 @@ function Register() {
       )
     )
       return;
-
-    fetch('/register', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    axios
+      .post('http://localhost:8080/api/v1/auth/register', {
         fullName,
         username,
         password,
         emailOrPhone,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          M.toast({ html: data.error, classes: 'red' });
-        } else {
-          M.toast({ html: data.message, classes: 'grey' });
+      })
+      .then((res) => {
+        console.log('thisis res:', res.data);
+        if (res) {
+          M.toast({ html: res.data, classes: 'grey' });
           console.log('reg sucessful');
         }
       })
@@ -111,7 +104,7 @@ function Register() {
         </p>
       </div>
       <div className="otherapps">
-        <p>Get the app</p>
+        <p>Get the app, maybe</p>
         <button type="button">
           <i className="fab fa-apple"></i> App Store
         </button>

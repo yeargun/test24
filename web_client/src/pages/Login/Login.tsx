@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Login.css';
+import M from 'materialize-css';
+import axios from 'axios';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -57,7 +58,7 @@ function Login() {
               type="text"
               value={emailPhoneUsername}
               placeholder="Username, Mobile Number or Email"
-              onChange={(e) => setEmailOrPhone(e.target.value)}
+              onChange={(e) => setEmailPhoneUsername(e.target.value)}
             />
             <input
               type="password"
@@ -81,7 +82,7 @@ function Login() {
         </p>
       </div>
       <div className="otherapps">
-        <p>Get the app</p>
+        <p>Get the app, maybe</p>
         <button type="button">
           <i className="fab fa-apple"></i> App Store
         </button>
