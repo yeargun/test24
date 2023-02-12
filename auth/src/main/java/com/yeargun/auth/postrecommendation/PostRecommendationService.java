@@ -11,10 +11,8 @@ public class PostRecommendationService {
     private final PostRepository repository;
 
     public PostRecommendationResponse register(RegisterRequest request) {
-
-        return PostRecommendationResponse.builder()
-                .token(jwtToken)
-                .build();
+        PostRecommendationResponse response = null;
+        return response;
 
     }
 

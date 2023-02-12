@@ -5,6 +5,8 @@ import jakarta.persistence.Id;
 
 import java.util.List;
 
+
+//DOCUMENT BASED MAYBE. @ me in case you change the db. I am very sorry (yeargun)
 public class Post {
     @Id
     @GeneratedValue
@@ -14,5 +16,8 @@ public class Post {
 //    private List<Comment> comments;
 //    private AccessRule accessRule;
 //    private HashMap<PostContent, PostType> postContents;
+
+
+
 
 }

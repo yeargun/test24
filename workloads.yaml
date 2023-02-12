@@ -20,43 +20,24 @@ spec:
           ports:
             - containerPort: 8080
               name: auth-service
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 8080
           env:
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: secret
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://localhost:5432/jwt_security
-            - name: SPRING_DATASOURCE_USERNAME
-              value: root
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres-auth
-
-spec:
-  selector:
-    matchLabels:
-      name: postgres-auth
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        name: postgres-auth
-    spec:
-      containers:
-        - name: postgres-auth
-          image: postgres
-          imagePullPolicy: "IfNotPresent"
-          ports:
-            - containerPort: 5432
-              name: postgresql
-          envFrom:
-            - configMapRef:
-                name: postgres-auth-config
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
-      volumes:
-        - name: postgredb
-          persistentVolumeClaim:
-            claimName: postgres-auth-pv-claim
+              value: "jdbc:postgresql://127.0.0.1:5432/stuf_db0"
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy
+          command:
+            - "/cloud_sql_proxy"
+            - "instances=gclouadfunctionstry0:europe-west9:stuf-test0"
+            - "-credential_file=/auth/src/main/resources/gclouadfunctionstry0-918d858115d7.json"
+      #     volumeMounts:
+      #       - name: clousql-instance-credentials
+      #         mountPath: secrets/cloudssql
+      #         readOnly: true
+      # volumes:
+      #   - name: cloudsql-instance-credentials
+      #     secret:
+      #       secretName: cloudsql-instance-credentials
