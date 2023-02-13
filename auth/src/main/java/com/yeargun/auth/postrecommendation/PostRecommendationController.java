@@ -22,7 +22,7 @@ public class PostRecommendationController {
             @RequestBody RegisterRequest request
     ) {
         //send stuff to backend & populate it
-        return null;
+        return ResponseEntity.ok(service.recommend(request));
     }
 
 

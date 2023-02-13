@@ -10,7 +10,7 @@ public class PostRecommendationService {
 
     private final PostRepository repository;
 
-    public PostRecommendationResponse register(RegisterRequest request) {
+    public PostRecommendationResponse recommend(RegisterRequest request) {
         PostRecommendationResponse response = null;
         return response;
 

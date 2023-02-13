@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    List<Post> findAllByGuts(String gutString);
+    List<Post> findAllById(String postId);
 }
