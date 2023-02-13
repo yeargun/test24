@@ -2,9 +2,12 @@ import { useState } from 'react';
 import './Register.css';
 import M from 'materialize-css';
 import axios from 'axios';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 function Register() {
-  const [fullName, setFullname] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -18,15 +21,16 @@ function Register() {
       return;
     axios
       .post('http://localhost:8080/api/v1/auth/register', {
-        fullName,
+        firstName,
+        lastName,
         username,
         password,
-        emailOrPhone,
+        email: emailOrPhone,
       })
       .then((res) => {
         console.log('thisis res:', res.data);
         if (res) {
-          M.toast({ html: res.data, classes: 'grey' });
+          // M.toast({ html: res.data, classes: 'grey' });
           console.log('reg sucessful');
         }
       })
@@ -58,9 +62,15 @@ function Register() {
             />
             <input
               type="text"
-              value={fullName}
-              placeholder="Full Name"
-              onChange={(e) => setFullname(e.target.value)}
+              value={firstName}
+              placeholder="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              value={lastName}
+              placeholder="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
             />
             <input
               type="text"
@@ -75,8 +85,9 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              onClick={() => {
+              onClick={(event) => {
                 uploadFields();
+                event.preventDefault();
               }}
             >
               Sign up
