@@ -20,12 +20,12 @@ spec:
   # This defines which pods are going to be represented by this service
   # The service becomes a network endpoint for either other services or
   # maybe external users to connect to (browser)
+  type: NodePort
   selector:
-    app2: web_app_stuf
+    app: webapp-react
 
   ports:
-    - name: http
-      port: 5173
-      nodePort: 30081
-
-  type: NodePort
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 31000
