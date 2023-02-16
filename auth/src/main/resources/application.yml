@@ -1,20 +1,19 @@
 spring:
-  sql:
-    init:
-      mode: always
-  cloud:
-    gcp:
-      project-id: gclouadfunctionstry0
-      credentials:
-        location: gclouadfunctionstry0-918d858115d7.json
-      sql:
-        database-name: test0
-        instance-connection-name: gclouadfunctionstry0:europe-west9:stuf-test0
-#34.163.137.87
+#  sql:
+#    init:
+#      mode: always
+#  cloud:
+#    gcp:
+#      project-id: gclouadfunctionstry0
+#      credentials:
+#        location: gclouadfunctionstry0-918d858115d7.json
+#      sql:
+#        database-name: test0
+#        instance-connection-name: gclouadfunctionstry0:europe-west9:stuf-test0
   datasource:
-#    url: jdbc:postgresql://34.163.137.87/jwt_security
-    username: postgres
-    password: secret
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
