@@ -12,6 +12,13 @@ function Post({ text, likes, reposts, highlightedComment, username }: Post) {
   if (!highlightedComment) highlightedComment = "xd";
   return (
     <div className="postWrapper">
+      <iframe
+        style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }}
+        width="800"
+        height="450"
+        src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FZSS982e8z0Y6c8RstvIT5m%2FSTUF-QUESTION-DESIGN%3Fnode-id%3D0%253A1%26t%3DWkMu01rmhtoVjzlS-1"
+        allowFullScreen
+      ></iframe>
       <div className="postSettings"></div>
       <div className="content">{text}</div>
       <div className="ReactionsWrapper">
