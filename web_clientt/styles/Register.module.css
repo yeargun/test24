@@ -37,6 +37,7 @@
   border: none;
   background-color: #000000;
   color: #ffffff;
+  box-sizing: border-box;
 }
 
 .pageHeader div {
@@ -79,7 +80,7 @@
 .formButton {
   width: inherit;
   margin-bottom: 20px;
-  padding: 7px 20px;
+  padding: 7px 5px;
   border-radius: 5px;
   border: 2px solid rgb(116, 116, 116);
   background: linear-gradient(135deg, #9ca24b 25%, transparent 25%) -50px 0,

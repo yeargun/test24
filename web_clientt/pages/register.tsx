@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "@/styles/Register.module.css";
+import styles from "../styles/Register.module.css";
 import axios from "axios";
 import Head from "next/head";
 
