@@ -12,6 +12,10 @@ function Register() {
   const [username, setUsername] = useState('');
   const [emailOrPhone, setEmailOrPhone] = useState('');
 
+  const saveJWTinCookie = (token) => {
+    document.cookie = 'Bearer ' + token;
+  };
+
   const uploadFields = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
