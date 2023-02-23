@@ -5,6 +5,7 @@
   align-items: center;
   text-align: center;
   min-height: 100vh;
+  height: 100%;
 }
 
 /* .questionCardWrapper {
@@ -14,3 +15,9 @@
   text-align: center;
   min-height: 100vh;
 } */
+
+.settingsIcon {
+  position: absolute;
+  right: 3%;
+  top: 5%;
+}

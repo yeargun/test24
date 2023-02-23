@@ -10,8 +10,6 @@ function ConceptSection({ concepts: concepts }: ConceptSection) {
     .join(" ")
     .slice(0, -2);
 
-  console.log(conceptsString);
-
   return (
     <>
       <div className={styles.concepts}>

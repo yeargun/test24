@@ -22,13 +22,19 @@ function QuestionCard({
 }: QuestionCard) {
   return (
     <div className={styles.questionCard}>
-      <div className="questionText">{questionText}</div>
-      <Image
-        src={imageUrl}
-        alt={"interesting question"}
-        width={100}
-        height={100}
-      />
+      <div className={styles.questionTextWrapper}>
+        <p className={styles.questionText}>{questionText}</p>
+      </div>
+      <div className={styles.imageWrapper}>
+        <Image
+          className={styles.image}
+          src={imageUrl}
+          alt={"interesting question"}
+          height={300}
+          width={300}
+        />
+      </div>
+
       <AnswerSection choices={choices} />
     </div>
   );
