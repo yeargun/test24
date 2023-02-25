@@ -6,24 +6,43 @@
   word-wrap: break-word; */
 }
 
-.choice {
+.nonSelectedChoice {
   border-radius: 2vh;
   background-color: rgb(230, 230, 230);
+  padding: 0.8vh;
+  margin: 0.7vh;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.15),
+    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.nonSelectedChoice input[type="radio"]:checked {
+  visibility: hidden;
+  margin: 0px;
+}
+
+.nonSelectedChoice input[type="radio"] {
+  visibility: hidden;
+  width: 0px;
+  margin: 0px;
+}
+
+.selectedChoice {
+  border-radius: 2vh;
+  font-weight: bold;
+  background-color: rgba(159, 191, 254, 0.1);
   padding: 0.8vh;
   margin: 0.7vh;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-.choice::selection {
-  background-color: aqua;
-}
-
-.choice input[type="radio"]:checked {
+.selectedChoice input[type="radio"]:checked {
   visibility: hidden;
+  margin: 0px;
 }
 
-.choice input[type="radio"] {
+.selectedChoice input[type="radio"] {
   visibility: hidden;
   width: 0px;
+  margin: 0px;
 }
