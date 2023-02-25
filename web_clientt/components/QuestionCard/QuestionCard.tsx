@@ -1,7 +1,7 @@
 import styles from "../../styles/QuestionCard.module.css";
 import Image from "next/image";
 import AnswerSection from "components/AnswerSection/AnswerSection";
-
+import { useState } from "react";
 interface QuestionCard {
   questionText: string;
   //cdn man :ok:
@@ -20,6 +20,8 @@ function QuestionCard({
   imageUrl: imageUrl,
   choices: choices,
 }: QuestionCard) {
+  const [imgHovered, setImgHovered] = useState(false);
+
   return (
     <div className={styles.questionCard}>
       <div className={styles.questionTextWrapper}>

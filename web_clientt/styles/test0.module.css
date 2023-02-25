@@ -1,11 +1,9 @@
 .page {
-  background-color: #545454;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  background-color: #edecec;
+  /* display: flex; */
+  padding: 5%;
   min-height: 100vh;
-  height: 100%;
+  min-width: 100vh;
 }
 
 /* .questionCardWrapper {
