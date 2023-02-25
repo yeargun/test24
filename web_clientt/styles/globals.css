@@ -20,6 +20,9 @@ html body {
 /* Let's get this party started */
 ::-webkit-scrollbar {
   width: 7px;
+  position: absolute;
+  right: 200px;
+  top: 20px;
 }
 
 /* Track */
@@ -38,6 +41,15 @@ html body {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(126, 126, 126, 0);
+}
+
+::-webkit-scrollbar-track {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+::-webkit-scrollbar-corner {
+  visibility: hidden;
 }
 
 :root {

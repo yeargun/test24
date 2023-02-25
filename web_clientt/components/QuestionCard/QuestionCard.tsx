@@ -29,6 +29,7 @@ function QuestionCard({
       </div>
       <div className={styles.imageWrapper}>
         <Image
+          draggable={false}
           className={styles.image}
           src={imageUrl}
           alt={"interesting question"}

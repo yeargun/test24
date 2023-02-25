@@ -1,8 +1,7 @@
 .page {
   background-color: #edecec;
-  /* display: flex; */
   padding: 5%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   min-width: 100vh;
 }
 
