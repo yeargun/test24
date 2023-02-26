@@ -9,6 +9,7 @@ function AnswerSection({ choices: choices }: AnswerSection) {
   const selectedChoiceStyle = styles.selectedChoice;
   const nonSelectedChoiceStyle = styles.nonSelectedChoice;
 
+  // TODO: yeargun use signal
   // const [getSelectedChoice, setSelectedChoice] = useSignal();
   const [selectedChoiceId, setSelectedChoiceId] = useState(null);
 

@@ -24,6 +24,7 @@ function QuestionCard({
 
   return (
     <div className={styles.questionCard}>
+      <div className={styles.questionCardHeaderBackground}></div>
       <div className={styles.questionTextWrapper}>
         <p className={styles.questionText}>{questionText}</p>
       </div>
