@@ -48,7 +48,6 @@ function test0() {
         width={50}
         height={50}
       />
-      <div className={styles.submitWrapper}>SUBMIT</div>
     </div>
   );
 }

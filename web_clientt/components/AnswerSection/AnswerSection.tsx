@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../../styles/AnswerSection.module.css";
+import { ARGUN } from "../../utils/api/axios";
 
 interface AnswerSection {
   choices: string[];
@@ -11,40 +12,47 @@ function AnswerSection({ choices: choices }: AnswerSection) {
 
   // TODO: yeargun use signal
   // const [getSelectedChoice, setSelectedChoice] = useSignal();
-  const [selectedChoiceId, setSelectedChoiceId] = useState(null);
+  const [selectedChoiceId, setSelectedChoiceId] = useState<number | undefined>(
+    undefined
+  );
 
   return (
     <div className={styles.answersWrapper}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("onsubmit e:", e.target.value);
+          ARGUN.post("/api/stfu", { ok: "e.target" })
+            .then((res) => console.log("crazy res"))
+            .catch((err) => console.log("diggahhh"));
         }}
       >
-        {choices.map((choice, id) => (
+        {choices.map((choice, index) => (
           <div
             className={
-              id == selectedChoiceId
+              index == selectedChoiceId
                 ? selectedChoiceStyle
                 : nonSelectedChoiceStyle
             }
-            key={id}
+            key={index}
             onClick={(e) => {
-              console.log(selectedChoiceId);
-              console.log(id);
-              console.log("asd");
-              if (selectedChoiceId == id) setSelectedChoiceId(id);
-              else setSelectedChoiceId(id);
+              e.preventDefault();
+              if (selectedChoiceId == index) setSelectedChoiceId(undefined);
+              else setSelectedChoiceId(index);
             }}
           >
-            <input type={"radio"} id={id} name="choice" value={id} />
-            <label key={id} htmlFor={id}>
+            <input type={"radio"} id={index} name="choice" value={index} />
+            <label key={index} htmlFor={index}>
+              {/* to display choice labels */}
               {/* <div className="a-b-c going to be">{id}</div> */}
               {choice}
             </label>
           </div>
         ))}
-        <button type="submit">Submit</button>
+        <input
+          type="submit"
+          className={styles.submitWrapper}
+          value={"SUBMIT"}
+        />
       </form>
     </div>
   );
