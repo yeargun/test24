@@ -21,6 +21,9 @@ function QuestionCard({
   choices: choices,
 }: QuestionCard) {
   const [imgHovered, setImgHovered] = useState(false);
+  const [answerExplanation, setAnswerExplanation] = useState<
+    string | undefined
+  >("");
 
   return (
     <div className={styles.questionCard}>
@@ -39,7 +42,10 @@ function QuestionCard({
         />
       </div>
 
-      <AnswerSection choices={choices} />
+      <AnswerSection
+        choices={choices}
+        setAnswerExplanation={setAnswerExplanation}
+      />
     </div>
   );
 }
