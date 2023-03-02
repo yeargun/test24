@@ -5,24 +5,22 @@ import { AnswerResponse } from "./AnswerResponse";
 
 interface AnswerSection {
   choices: string[];
+  handleAnswerExplanation: (explanation: string) => void;
 }
+// TODO: yeargun use signal
+// const [getSelectedChoice, setSelectedChoice] = useSignal();
 
-function AnswerSection(
-  { choices: choices }: AnswerSection,
-  setAnswerExplanation: (explanation: string) => void
-) {
+function AnswerSection({ choices, handleAnswerExplanation }: AnswerSection) {
   const [rightChoiceId, setRightChoiceId] = useState<number | undefined>(
     undefined
   );
 
-  // TODO: yeargun use signal
-  // const [getSelectedChoice, setSelectedChoice] = useSignal();
   const [selectedChoiceId, setSelectedChoiceId] = useState<number | undefined>(
     undefined
   );
 
   const questionChoiceStyling = (index: number) => {
-    if (rightChoiceId || rightChoiceId == 0) {
+    if (rightChoiceId != undefined && rightChoiceId != null) {
       if (index == rightChoiceId) return styles.correctChoice;
       else if (index != rightChoiceId && index == selectedChoiceId)
         return styles.faultyAnswerChoice;
@@ -36,15 +34,25 @@ function AnswerSection(
   return (
     <div className={styles.answersWrapper}>
       <form
+        className={
+          rightChoiceId != undefined && rightChoiceId != null
+            ? styles.preSubmitForm
+            : styles.form
+        }
         onSubmit={(e) => {
           e.preventDefault();
+          if (rightChoiceId != undefined && rightChoiceId != null) return;
           if (selectedChoiceId || selectedChoiceId == 0)
-            ARGUN.post("/api/stfu", { questionId: 1, answer: selectedChoiceId })
+            ARGUN.post("/sendAnswer", {
+              questionId: 1,
+              answer: selectedChoiceId,
+            })
               .then((response) => {
+                console.log("response", response);
                 setRightChoiceId(response.data.rightChoiceId);
-                setAnswerExplanation(response.data.explanation);
+                handleAnswerExplanation(response.data.explanation);
               })
-              .catch((err) => console.log("diggahhh"));
+              .catch((err) => console.log("diggahhh", err));
         }}
       >
         {choices.map((choice, index) => (
@@ -53,6 +61,7 @@ function AnswerSection(
             key={index}
             onClick={(e) => {
               e.preventDefault();
+              if (rightChoiceId != undefined && rightChoiceId != null) return;
               if (selectedChoiceId == index) setSelectedChoiceId(undefined);
               else setSelectedChoiceId(index);
             }}
@@ -70,11 +79,13 @@ function AnswerSection(
             </label>
           </div>
         ))}
-        <input
-          type="submit"
-          className={styles.submitWrapper}
-          value={"SUBMIT"}
-        />
+        {(rightChoiceId == undefined || rightChoiceId == null) && (
+          <input
+            type="submit"
+            className={styles.submitWrapper}
+            value={"SUBMIT"}
+          />
+        )}
       </form>
     </div>
   );

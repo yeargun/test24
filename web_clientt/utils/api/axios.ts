@@ -1,10 +1,9 @@
 import axios from "axios";
 
 export const ARGUN = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:9191/api/question",
   headers: {
     common: {
-      //i like it dat waaay 😈 Dddds
       "Content-Type": "application/json",
     },
   },

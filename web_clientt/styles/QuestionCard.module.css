@@ -99,14 +99,26 @@
   background-color: #e5e5e5;
 }
 
-/* @keyframes ripple {
-  from {
-    opacity: 1;
-    transform: scale(0);
-  }
+.expandWrapper {
+  display: flex;
+  justify-content: space-between;
+}
 
-  to {
-    opacity: 0;
-    transform: scale(10);
-  }
-} */
+.expandWrapper hr {
+  width: 42%;
+  height: 0.1vh;
+  border-width: 0;
+  background-color: black;
+}
+
+.expandWrapper button {
+  border: none;
+  text-decoration: underline;
+  background-color: inherit;
+  color: grey;
+}
+
+.expandWrapper button:hover {
+  font: bold;
+  color: black;
+}

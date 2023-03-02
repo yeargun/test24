@@ -25,8 +25,28 @@ function QuestionCard({
     string | undefined
   >("");
 
+  const handleAnswerExplanation = (explanation: string) => {
+    console.log("xd", explanation);
+    setAnswerExplanation(explanation);
+  };
+
+  const expandExplanation = () => {
+    console.log("expanding explanation");
+  };
+
   return (
     <div className={styles.questionCard}>
+      {answerExplanation && (
+        <>
+          <p>{answerExplanation}</p>
+          <div className={styles.expandWrapper}>
+            <hr />
+            <button>expand</button>
+            <hr />
+          </div>
+        </>
+      )}
+
       <div className={styles.questionCardHeaderBackground}></div>
       <div className={styles.questionTextWrapper}>
         <p className={styles.questionText}>{questionText}</p>
@@ -44,7 +64,7 @@ function QuestionCard({
 
       <AnswerSection
         choices={choices}
-        setAnswerExplanation={setAnswerExplanation}
+        handleAnswerExplanation={handleAnswerExplanation}
       />
     </div>
   );
