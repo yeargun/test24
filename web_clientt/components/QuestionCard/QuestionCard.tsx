@@ -34,20 +34,25 @@ function QuestionCard({
     console.log("expanding explanation");
   };
 
+  const answerExplanationComponent = answerExplanation && (
+    // npm react-markdown maybe
+    <>
+      <p>{answerExplanation}</p>
+      <div className={styles.expandWrapper}>
+        <hr />
+        <button>expand</button>
+        <hr />
+      </div>
+    </>
+  );
+
   return (
     <div className={styles.questionCard}>
-      {answerExplanation && (
-        <>
-          <p>{answerExplanation}</p>
-          <div className={styles.expandWrapper}>
-            <hr />
-            <button>expand</button>
-            <hr />
-          </div>
-        </>
-      )}
+      {answerExplanationComponent}
 
-      <div className={styles.questionCardHeaderBackground}></div>
+      {!answerExplanation && (
+        <div className={styles.questionCardHeaderBackground}></div>
+      )}
       <div className={styles.questionTextWrapper}>
         <p className={styles.questionText}>{questionText}</p>
       </div>

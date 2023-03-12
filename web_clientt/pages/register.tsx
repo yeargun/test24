@@ -1,19 +1,15 @@
 import { useState } from "react";
 import styles from "../styles/Register.module.css";
-import axios from "axios";
 import Head from "next/head";
-
-axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
-axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+import { ARGUN } from "utils/api/axios";
 
 function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
 
-  const saveJWTinCookie = (token) => {
+  const saveJWTinCookie = (token: string) => {
     document.cookie = "Bearer " + token;
   };
 
@@ -24,19 +20,17 @@ function Register() {
       )
     )
       return;
-    axios
-      .post("http://localhost:8080/api/v1/auth/register", {
-        firstName,
-        lastName,
-        username,
-        password,
-        email: emailOrPhone,
-      })
+    ARGUN.post("/auth/register", {
+      name,
+      username,
+      password,
+      email: emailOrPhone,
+    })
       .then((res) => {
         console.log("thisis res:", res.data);
         if (res) {
-          // M.toast({ html: res.data, classes: 'grey' });
           console.log("reg sucessful");
+          saveJWTinCookie(res.data);
         }
       })
       .catch((err) => {
@@ -77,16 +71,9 @@ function Register() {
               <input
                 className={styles.input}
                 type="text"
-                value={firstName}
-                placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                value={lastName}
-                placeholder="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
+                value={name}
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
               />
               <input
                 className={styles.input}

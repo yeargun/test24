@@ -1,41 +1,57 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "../styles/Login.module.css";
-import axios from "axios";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "features/auth/authSlice";
+import { useLoginMutation } from "features/auth/authApiSlice";
+import Link from "next/link";
 
 function Login() {
+  const usernameRef = useRef();
+  const errRef = useRef();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [emailPhoneUsername, setEmailPhoneUsername] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const router = useRouter();
 
-  const uploadFields = () => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        emailPhoneUsername
-      )
-    )
-      return;
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
-    fetch("/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password,
-        emailPhoneUsername,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          M.toast({ html: data.error, classes: "red" });
-        } else {
-          M.toast({ html: data.message, classes: "grey" });
-          console.log("reg sucessful");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  useEffect(() => {
+    usernameRef?.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [username, password]);
+
+  const handleUsernameInput = (e) => setUsername(e.target.value);
+
+  const handlePasswordInput = (e) => setPassword(e.target.value);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const jwtToken = await login({ username, password }).unwrap();
+      dispatch(setCredentials({ ...jwtToken, username }));
+
+      setUsername("");
+      setPassword("");
+      router.push("/test0");
+    } catch (err) {
+      if (!err?.originalStatus) {
+        // isloading: true until timeout occurs
+        setErrMsg("No Server Response");
+      } else if (err.originalStatus === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.originalStatus === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errRef?.current?.focus();
+    }
   };
 
   return (
@@ -53,33 +69,31 @@ function Login() {
           </div>
         </div>
         <div className={styles.container}>
-          <form action="" className={styles.form}>
+          {errMsg && (
+            <p ref={errRef} className={styles.errMsg} aria-live="assertive">
+              {errMsg}
+            </p>
+          )}
+          <form action="" className={styles.form} onSubmit={handleSubmit}>
             <input
               type="text"
-              value={emailPhoneUsername}
+              value={username}
               placeholder="Username, Mobile Number or Email"
-              onChange={(e) => setEmailPhoneUsername(e.target.value)}
+              onChange={handleUsernameInput}
             />
             <input
               type="password"
               value={password}
               placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordInput}
             />
-            <button
-              className={styles.formButton}
-              onClick={() => {
-                uploadFields();
-              }}
-            >
-              Login
-            </button>
+            <button className={styles.formButton}>Login</button>
           </form>
         </div>
       </div>
       <div className={styles.option}>
         <p>
-          Don't have an account? <a href="/register">Sign up</a>
+          Don't have an account? <Link href="/register">Sign up</Link>
         </p>
       </div>
       <div className={styles.otherapps}>

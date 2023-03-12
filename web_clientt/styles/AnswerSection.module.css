@@ -4,6 +4,7 @@
   text-align: left;
   /* text-overflow: auto;
   word-wrap: break-word; */
+  margin: 0vh 0vh 4vh 0vh;
 }
 
 .nonSelectedChoice {
@@ -47,7 +48,7 @@
   margin: 0px;
 }
 
-.submitWrapper {
+.submitButton {
   /* TODO: yeargun, submit butonu pozisyonu soru widthine göre sekillenmiyo */
   position: fixed;
   right: 5vh;
@@ -60,7 +61,6 @@
 
   border-radius: 20px;
   border: 0.1vh solid black;
-  background-color: aqua;
 
   width: 10vh;
   height: 4vh;

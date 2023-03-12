@@ -17,9 +17,6 @@ interface Question {
 }
 
 function Question(props: Question) {
-  const answerQuestion = () => {
-    console.log("xasdfsa");
-  };
   return (
     <div className={styles.question}>
       <ConceptSection concepts={props.concepts} />
