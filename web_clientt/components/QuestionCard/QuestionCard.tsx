@@ -7,6 +7,8 @@ interface QuestionCard {
   //cdn man :ok:
   imageUrl: string;
   choices: string[];
+  rightChoiceId: number | undefined;
+  questionId: string | undefined;
   // discussion section opens after client answers the question
   // further content<T> is provided about explanation from the question creator
   // maybe markdown? Is Okay.
@@ -19,8 +21,9 @@ function QuestionCard({
   questionText: questionText,
   imageUrl: imageUrl,
   choices: choices,
+  rightChoiceId: rightChoiceId,
+  questionId: questionId,
 }: QuestionCard) {
-  const [imgHovered, setImgHovered] = useState(false);
   const [answerExplanation, setAnswerExplanation] = useState<
     string | undefined
   >("");
@@ -69,7 +72,9 @@ function QuestionCard({
 
       <AnswerSection
         choices={choices}
+        rightChoiceId={rightChoiceId}
         handleAnswerExplanation={handleAnswerExplanation}
+        questionId={questionId}
       />
     </div>
   );

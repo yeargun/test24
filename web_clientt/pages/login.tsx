@@ -34,11 +34,13 @@ function Login() {
 
     try {
       const jwtToken = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ ...jwtToken, username }));
-
+      dispatch(setCredentials({ ...jwtToken }));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("username", username);
+      }
       setUsername("");
       setPassword("");
-      router.push("/test0");
+      router.push("/concept1");
     } catch (err) {
       if (!err?.originalStatus) {
         // isloading: true until timeout occurs

@@ -19,7 +19,9 @@ const questionSlice = createSlice({
       state.isLoadingQuestion = true;
     },
     setNextQuestionReducer: (state, action) => {
-      state = { ...state, ...action.payload };
+      state.choices = action.payload.choices;
+      state.questionText = action.payload.questionText;
+      state.questionId = action.payload.questionId;
       state.isLoadingQuestion = false;
     },
     getQuestionError: (state) => {
@@ -54,3 +56,9 @@ export default questionSlice.reducer;
 export const selectCurrentUser = (state) => state.auth.username;
 export const selectCurrentToken = (state) => state.auth.token;
 export const selectNextQuestion = (state) => state.question;
+export const selectAnswerData = (state) => {
+  return {
+    explanation: state.question.explanation,
+    rightChoiceId: state.question.rightChoiceId,
+  };
+};

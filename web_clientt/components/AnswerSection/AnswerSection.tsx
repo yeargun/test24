@@ -2,13 +2,13 @@ import { useState, useEffect, FormEvent } from "react";
 import styles from "../../styles/AnswerSection.module.css";
 // import { ARGUN } from "../../utils/api/axios";
 // import { AnswerResponse } from "./AnswerResponse";
-import { useDispatch } from "react-redux";
-import { answerQuestionFetch } from "../../redux-saga/Question/questionState";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useSendAnswerMutation } from "features/question/questionApiSlice";
 interface AnswerSection {
   choices: string[];
   handleAnswerExplanation: (explanation: string) => void;
-  rightChoiceId: number;
+  rightChoiceId: number | undefined;
+  questionId: string | undefined;
 }
 // TODO: yeargun use signal
 // const [getSelectedChoice, setSelectedChoice] = useSignal();
@@ -17,11 +17,13 @@ function AnswerSection({
   choices,
   handleAnswerExplanation,
   rightChoiceId,
+  questionId,
 }: AnswerSection) {
   const dispatch = useDispatch();
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | undefined>(
     undefined
   );
+  const [sendAnswer, { isLoading }] = useSendAnswerMutation();
 
   const questionChoiceStyling = (index: number) => {
     if (rightChoiceId != undefined && rightChoiceId != null) {
@@ -35,10 +37,24 @@ function AnswerSection({
     }
   };
 
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      if (selectedChoiceId == null || selectedChoiceId == undefined) return;
+      const { rightChoiceId, explanation } = await dispatch(
+        sendAnswer({
+          questionId: questionId,
+          choosenChoiceId: selectedChoiceId,
+        }).unwrap()
+      );
+    } catch (err) {
+      console.log("error sending answer:", err);
+    }
+
     console.log("asdasd");
-    if (!rightChoiceId) dispatch(answerQuestionFetch());
+    // if (rightChoiceId != undefined) {
+    //   dispatch(answerQuestionFetch());
+    // }
   };
 
   return (

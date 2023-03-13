@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCredentials } from "features/auth/authSlice";
 import { useGetNextQuestionMutation } from "features/question/questionApiSlice";
 import {
-  setNextQuestion,
+  selectAnswerData,
   setNextQuestionReducer,
 } from "features/question/questionSlice";
 import { selectNextQuestion } from "features/question/questionSlice";
@@ -16,25 +16,16 @@ interface Question {
   imageUrl: string;
   choices: string[];
   concepts: string[];
+  questionId: string | undefined;
 }
 
-//should i define const functions outside of the funtion. realy makes no sense..
-//them being inside component related to state probably ?
 function Test0() {
-  // const question = useSelector((state) => state.question.question);
-  // const explanation = useSelector((state) => state.question.explanation);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getQuestionFetch());
-  // }, [dispatch]);
   const [getNextQuestion, { isLoading }] = useGetNextQuestionMutation();
   const [nextQuestion, setNextQuestion] = useState({});
 
   const dispatch = useDispatch();
   const currentQuestion = useSelector(selectNextQuestion);
-  console.log("currentq", currentQuestion);
-
+  const { rightChoiceId, explanation } = useSelector(selectAnswerData);
   // useLayoutEffect(() => {
   // }, [dispatch]);
 
@@ -65,21 +56,18 @@ function Test0() {
   return (
     <div className={styles.page}>
       <Question
-        // concept={question.concepts}
         concepts={[
           "System Design",
           "Database Management",
           "Computer Science",
           "SQL",
         ]}
-        // imageUrl={question.imageUrl}
         imageUrl="https://www.w3schools.com/howto/img_avatar2.png"
-        // questionText={question.text}
         questionText={nextQuestion.questionText}
-        // choices={question.choices}
         choices={nextQuestion.choices}
+        questionId={nextQuestion.questionId}
       />
-      {
+      {(rightChoiceId || rightChoiceId == 0) && (
         <input
           type="button"
           className={styles.nextQuestionButton}
@@ -91,7 +79,7 @@ function Test0() {
             setNextQuestion(res);
           }}
         />
-      }
+      )}
       <Image
         className={styles.settingsIcon}
         src={"/settings-icon.png"}
@@ -100,6 +88,7 @@ function Test0() {
         height={50}
         onClick={handleSettingsButtonClick}
       />
+      {isLoading && <p>asddsddasdasdad</p>}
     </div>
   );
 }

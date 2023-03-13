@@ -1,41 +1,58 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "../styles/Register.module.css";
 import Head from "next/head";
-import { ARGUN } from "utils/api/axios";
+import { useRegisterMutation } from "features/auth/authApiSlice";
+import { useRouter } from "next/router";
+import { setCredentials } from "features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { cookies } from "./_app";
 
 function Register() {
+  const errRef = useRef();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
-  const saveJWTinCookie = (token: string) => {
-    document.cookie = "Bearer " + token;
-  };
+  const router = useRouter();
+  const [register, { isLoading }] = useRegisterMutation();
+  const dispatch = useDispatch();
 
-  const uploadFields = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         emailOrPhone
       )
     )
       return;
-    ARGUN.post("/auth/register", {
-      name,
-      username,
-      password,
-      email: emailOrPhone,
-    })
-      .then((res) => {
-        console.log("thisis res:", res.data);
-        if (res) {
-          console.log("reg sucessful");
-          saveJWTinCookie(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      cookies.remove("Authorization");
+      const jwtToken = await register({
+        username,
+        password,
+        name,
+        email: emailOrPhone,
+      }).unwrap();
+      dispatch(setCredentials({ ...jwtToken }));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("username", username);
+      }
+      router.push("/concept1");
+    } catch (err) {
+      if (!err?.originalStatus) {
+        // isloading: true until timeout occurs
+        setErrMsg("No Server Response");
+      } else if (err.originalStatus === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.originalStatus === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errRef?.current?.focus();
+    }
   };
 
   return (
@@ -60,7 +77,12 @@ function Register() {
             </div>
           </div>
           <div className={styles.container}>
-            <form className={styles.form} action="">
+            {errMsg && (
+              <p ref={errRef} className={styles.errMsg} aria-live="assertive">
+                {errMsg}
+              </p>
+            )}
+            <form className={styles.form} action="" onSubmit={handleSubmit}>
               <input
                 className={styles.input}
                 type="text"
@@ -89,15 +111,7 @@ function Register() {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button
-                className={styles.formButton}
-                onClick={(event) => {
-                  uploadFields();
-                  event.preventDefault();
-                }}
-              >
-                Sign up
-              </button>
+              <button className={styles.formButton}>Sign Up</button>
             </form>
 
             <ul>
