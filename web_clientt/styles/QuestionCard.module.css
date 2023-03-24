@@ -1,7 +1,8 @@
 .questionCard {
   position: relative;
+  min-height: 25vh;
   max-height: 75vh;
-  min-width: 50%;
+  min-width: 45vw;
   max-width: 100%;
   width: fit-content;
   border-radius: 4vh;
@@ -121,4 +122,28 @@
 .expandWrapper button:hover {
   font: bold;
   color: black;
+}
+
+.loader {
+  position: inherit;
+  display: inline-block;
+  left: 40%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+
+  border: 16px solid #d5d5d5; /* Light grey */
+  border-top: 16px solid #828282; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

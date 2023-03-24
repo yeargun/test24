@@ -9,6 +9,7 @@ interface QuestionCard {
   choices: string[];
   rightChoiceId: number | undefined;
   questionId: string | undefined;
+  isLoading: boolean;
   // discussion section opens after client answers the question
   // further content<T> is provided about explanation from the question creator
   // maybe markdown? Is Okay.
@@ -23,13 +24,13 @@ function QuestionCard({
   choices: choices,
   rightChoiceId: rightChoiceId,
   questionId: questionId,
+  isLoading: isLoading,
 }: QuestionCard) {
   const [answerExplanation, setAnswerExplanation] = useState<
     string | undefined
   >("");
 
   const handleAnswerExplanation = (explanation: string) => {
-    console.log("xd", explanation);
     setAnswerExplanation(explanation);
   };
 
@@ -49,10 +50,9 @@ function QuestionCard({
     </>
   );
 
-  return (
-    <div className={styles.questionCard}>
+  const questionContent = (
+    <>
       {answerExplanationComponent}
-
       {!answerExplanation && (
         <div className={styles.questionCardHeaderBackground}></div>
       )}
@@ -69,13 +69,21 @@ function QuestionCard({
           width={300}
         />
       </div>
+    </>
+  );
 
-      <AnswerSection
-        choices={choices}
-        rightChoiceId={rightChoiceId}
-        handleAnswerExplanation={handleAnswerExplanation}
-        questionId={questionId}
-      />
+  return (
+    <div className={styles.questionCard}>
+      {!isLoading && questionContent}
+      {!isLoading && (
+        <AnswerSection
+          choices={choices}
+          rightChoiceId={rightChoiceId}
+          handleAnswerExplanation={handleAnswerExplanation}
+          questionId={questionId}
+        />
+      )}
+      {isLoading && <div className={styles.loader}></div>}
     </div>
   );
 }

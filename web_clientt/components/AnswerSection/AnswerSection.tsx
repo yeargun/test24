@@ -4,6 +4,8 @@ import styles from "../../styles/AnswerSection.module.css";
 // import { AnswerResponse } from "./AnswerResponse";
 import { useDispatch, useSelector } from "react-redux";
 import { useSendAnswerMutation } from "features/question/questionApiSlice";
+import { setRightQuestionDetails } from "features/question/questionSlice";
+
 interface AnswerSection {
   choices: string[];
   handleAnswerExplanation: (explanation: string) => void;
@@ -25,6 +27,10 @@ function AnswerSection({
   );
   const [sendAnswer, { isLoading }] = useSendAnswerMutation();
 
+  useEffect(() => {
+    setSelectedChoiceId(undefined);
+  }, [questionId]);
+
   const questionChoiceStyling = (index: number) => {
     if (rightChoiceId != undefined && rightChoiceId != null) {
       if (index == rightChoiceId) return styles.correctChoice;
@@ -41,20 +47,16 @@ function AnswerSection({
     e.preventDefault();
     try {
       if (selectedChoiceId == null || selectedChoiceId == undefined) return;
-      const { rightChoiceId, explanation } = await dispatch(
-        sendAnswer({
-          questionId: questionId,
-          choosenChoiceId: selectedChoiceId,
-        }).unwrap()
-      );
-    } catch (err) {
-      console.log("error sending answer:", err);
-    }
+      // setSelectedChoiceId(undefined);
+      const { rightChoiceId, explanation } = await sendAnswer({
+        questionId,
+        choosenChoiceId: selectedChoiceId,
+      }).unwrap();
 
-    console.log("asdasd");
-    // if (rightChoiceId != undefined) {
-    //   dispatch(answerQuestionFetch());
-    // }
+      dispatch(setRightQuestionDetails({ rightChoiceId, explanation }));
+    } catch (err) {
+      console.log("Error, try relogging");
+    }
   };
 
   return (

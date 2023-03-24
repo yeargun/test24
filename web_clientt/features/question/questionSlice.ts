@@ -3,9 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const questionSlice = createSlice({
   name: "question",
   initialState: {
-    question: undefined,
-    isLoadingQuestion: false,
-    isLoadingAnswer: false,
     rightChoiceId: undefined,
     explanation: undefined,
     questionId: undefined,
@@ -15,47 +12,28 @@ const questionSlice = createSlice({
   },
   reducers: {
     // ####
-    getQuestionFetch: (state) => {
-      state.isLoadingQuestion = true;
-    },
-    setNextQuestionReducer: (state, action) => {
+    setNextQuestion: (state, action) => {
       state.choices = action.payload.choices;
       state.questionText = action.payload.questionText;
       state.questionId = action.payload.questionId;
-      state.isLoadingQuestion = false;
-    },
-    getQuestionError: (state) => {
-      state.isLoadingQuestion = false;
+      state.explanation = undefined;
+      state.rightChoiceId = undefined;
     },
     // ####
-    answerQuestionFetch: (state) => {
-      state.isLoadingAnswer = true;
-    },
-    answerQuestionSuccess: (state, action) => {
-      state.rightChoiceId = action.payload.rightChoiceId;
-      state.explanation = action.payload.explanation;
-      state.isLoadingAnswer = false;
-    },
-    answerQuestionError: (state) => {
-      state.isLoadingAnswer = false;
+    setRightQuestionDetails: (state, action) => {
+      const { rightChoiceId, explanation } = action.payload;
+      state.rightChoiceId = rightChoiceId;
+      state.explanation = explanation;
     },
     // ####
   },
 });
 
-export const {
-  getQuestionFetch,
-  getQuestionError,
-  setNextQuestionReducer,
-  answerQuestionError,
-  answerQuestionFetch,
-  answerQuestionSuccess,
-} = questionSlice.actions;
+export const { setNextQuestion, setRightQuestionDetails } =
+  questionSlice.actions;
 export default questionSlice.reducer;
 
-export const selectCurrentUser = (state) => state.auth.username;
-export const selectCurrentToken = (state) => state.auth.token;
-export const selectNextQuestion = (state) => state.question;
+export const selectQuestion = (state) => state.question;
 export const selectAnswerData = (state) => {
   return {
     explanation: state.question.explanation,
