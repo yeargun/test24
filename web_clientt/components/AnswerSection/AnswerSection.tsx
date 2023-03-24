@@ -8,19 +8,13 @@ import { setRightQuestionDetails } from "features/question/questionSlice";
 
 interface AnswerSection {
   choices: string[];
-  handleAnswerExplanation: (explanation: string) => void;
   rightChoiceId: number | undefined;
   questionId: string | undefined;
 }
 // TODO: yeargun use signal
 // const [getSelectedChoice, setSelectedChoice] = useSignal();
 
-function AnswerSection({
-  choices,
-  handleAnswerExplanation,
-  rightChoiceId,
-  questionId,
-}: AnswerSection) {
+function AnswerSection({ choices, rightChoiceId, questionId }: AnswerSection) {
   const dispatch = useDispatch();
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | undefined>(
     undefined

@@ -48,6 +48,7 @@ function Test0() {
           "Computer Science",
           "SQL",
         ]}
+        explanation={explanation}
         // imageUrl="https://www.w3schools.com/howto/img_avatar2.png"
       />
       {(rightChoiceId || rightChoiceId == 0) && (
@@ -71,7 +72,6 @@ function Test0() {
         height={50}
         onClick={handleSettingsButtonClick}
       />
-      {isLoading && <p>asddsddasdasdad</p>}
     </div>
   );
 }

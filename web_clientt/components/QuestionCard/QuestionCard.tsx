@@ -10,6 +10,7 @@ interface QuestionCard {
   rightChoiceId: number | undefined;
   questionId: string | undefined;
   isLoading: boolean;
+  explanation: string | undefined;
   // discussion section opens after client answers the question
   // further content<T> is provided about explanation from the question creator
   // maybe markdown? Is Okay.
@@ -25,26 +26,21 @@ function QuestionCard({
   rightChoiceId: rightChoiceId,
   questionId: questionId,
   isLoading: isLoading,
+  explanation: explanation,
 }: QuestionCard) {
-  const [answerExplanation, setAnswerExplanation] = useState<
-    string | undefined
-  >("");
-
-  const handleAnswerExplanation = (explanation: string) => {
-    setAnswerExplanation(explanation);
-  };
+  console.log("explanation", explanation);
 
   const expandExplanation = () => {
     console.log("expanding explanation");
   };
 
-  const answerExplanationComponent = answerExplanation && (
+  const answerExplanationComponent = explanation && (
     // npm react-markdown maybe
     <>
-      <p>{answerExplanation}</p>
+      <p>{explanation}</p>
       <div className={styles.expandWrapper}>
         <hr />
-        <button>expand</button>
+        <button onClick={expandExplanation}>expand</button>
         <hr />
       </div>
     </>
@@ -53,7 +49,7 @@ function QuestionCard({
   const questionContent = (
     <>
       {answerExplanationComponent}
-      {!answerExplanation && (
+      {!explanation && (
         <div className={styles.questionCardHeaderBackground}></div>
       )}
       <div className={styles.questionTextWrapper}>
@@ -79,7 +75,6 @@ function QuestionCard({
         <AnswerSection
           choices={choices}
           rightChoiceId={rightChoiceId}
-          handleAnswerExplanation={handleAnswerExplanation}
           questionId={questionId}
         />
       )}
