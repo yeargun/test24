@@ -1,0 +1,25 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/questions
+#      authentication-database: admin
+#      username: rootuser
+#      password: rootpass
+      database: questions
+      port: 27017
+      host: localhost
+
+#  MYSQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yeargun
+    username: root
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

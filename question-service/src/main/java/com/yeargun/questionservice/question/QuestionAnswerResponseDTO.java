@@ -1,4 +1,4 @@
-package com.yeargun.questionservice.dto;
+package com.yeargun.questionservice.question;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

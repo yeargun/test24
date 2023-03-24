@@ -1,2 +1,5 @@
-package com.yeargun.questionservice.token;public class TokenType {
+package com.yeargun.questionservice.token;
+
+public enum TokenType {
+    BEARER
 }

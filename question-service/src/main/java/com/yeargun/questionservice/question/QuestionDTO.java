@@ -1,19 +1,13 @@
-package com.yeargun.questionservice.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.yeargun.questionservice.question;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuestionDTO {
+public record QuestionDTO (
+        String questionId,
+        String questionText,
+        List<String> choices,
+        List<String> concepts
+){
 
-    private String id;
-    private String questionId;
-    private String questionText;
-    private List<String> choices;
-    private String explanation;
+
 }

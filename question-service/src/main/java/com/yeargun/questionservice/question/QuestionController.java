@@ -1,18 +1,18 @@
-package com.yeargun.questionservice.controller;
+package com.yeargun.questionservice.question;
 
-import com.yeargun.questionservice.dto.QuestionAnswerDTO;
-import com.yeargun.questionservice.dto.QuestionAnswerResponseDTO;
+import com.yeargun.questionservice.auth.LoginResponse;
 import com.yeargun.questionservice.entity.Question;
-import com.yeargun.questionservice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins="http://localhost:3000")
-@RequestMapping("/api/question")
+@CrossOrigin(origins="http://localhost:3000", allowCredentials = "true")
+@RequestMapping("/api/v1/question")
 @RestController
 public class QuestionController {
     @Autowired
@@ -23,6 +23,11 @@ public class QuestionController {
         return service.handleQuestionAnswer(answer);
     }
 
+    @GetMapping("/next")
+    public ResponseEntity  getNextQuestion(){
+        return ResponseEntity.ok(service.getNextQuestion());
+    }
+
     @PostMapping("/uploadQuestion")
     public int uploadQuestion(@RequestBody Question question){
         service.uploadQuestion(question);
@@ -30,7 +35,7 @@ public class QuestionController {
     }
     
     @GetMapping("/getQuestionById")
-    public Optional<Question> getQuestionById(@RequestParam String questionId){
+    public Optional<QuestionDTO> getQuestionById(@RequestParam String questionId){
         return service.getQuestionByQuestionId(questionId);
     }
 

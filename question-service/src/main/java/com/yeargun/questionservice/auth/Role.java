@@ -1,2 +1,7 @@
-package com.yeargun.questionservice.auth;public class Role {
+package com.yeargun.questionservice.auth;
+
+public enum Role {
+
+    USER,
+    ADMIN
 }
