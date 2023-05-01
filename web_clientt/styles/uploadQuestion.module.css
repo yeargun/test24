@@ -3,20 +3,28 @@
   height: 100%;
   position: absolute;
   background-color: rgb(255, 255, 255);
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .str2mdTable {
   min-width: 55%;
-  min-height: 40%;
+  min-height: 2%;
   max-width: 90%;
   max-height: 80%;
   height: fit-content;
-  width: fit-content;
+  /* width: fit-content; */
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top: 20%; */
+  /* transform: translateX(-50%); */
+
+  border: rgba(0, 0, 0, 0.162) solid 1px;
+  padding: 10px;
 }
 
 .tabs {
@@ -54,4 +62,219 @@
   /* flex: 1; */
   margin-left: 20px;
   width: 50%;
+}
+
+.choices {
+  margin-top: 15px;
+  max-height: 40%;
+  overflow: auto;
+}
+
+.addedChoice {
+  padding: 10px;
+  border: 1.5px solid rgba(0, 52, 137, 0.548);
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  min-width: 500px;
+  width: fit-content;
+  max-width: 900px;
+
+  display: flex;
+}
+
+.addedChoiceButtons {
+  margin-left: auto;
+
+  display: flex;
+  gap: 5px;
+}
+
+/* ##### */
+.removeAddedChoiceButton {
+  user-select: none;
+  background-color: rgba(255, 255, 255, 0.077);
+  border-radius: 20%;
+  border: rgba(255, 0, 0, 0.29) 1px solid;
+  font-size: 1.1rem;
+  color: white;
+  -webkit-text-stroke: 1px rgba(255, 0, 0, 0.666);
+}
+
+.removeAddedChoiceButton:hover {
+  background-color: rgba(255, 0, 0, 0.21);
+}
+
+.removeAddedChoiceButton:active {
+  border: rgba(255, 0, 0, 0.89) 1px solid;
+}
+/* ##### */
+
+.editAddedChoiceButton {
+  user-select: none;
+
+  background-color: rgba(255, 255, 255, 0.077);
+  border-radius: 20%;
+  border: rgba(0, 0, 0, 0.545) 1px solid;
+
+  color: white;
+}
+
+.editAddedChoiceButton:hover {
+  background-color: rgba(0, 0, 0, 0.068);
+}
+
+.editAddedChoiceButton:active {
+  border: rgba(0, 0, 0, 1) 1px solid;
+}
+.editIcon:active {
+  opacity: 0.9;
+}
+.editIcon {
+  user-select: none;
+
+  opacity: 0.7;
+}
+
+.addExtraChoiceWrapper {
+  padding: 10px;
+  margin-top: 15px;
+  color: rgba(0, 52, 137, 0.848);
+  border: rgba(0, 52, 137, 0.548) solid 1px;
+  border-radius: 15px;
+  user-select: none;
+}
+
+.addExtraChoiceWrapper:hover {
+  background-color: rgba(21, 58, 117, 0.115);
+}
+
+.addExtraChoiceWrapper:active {
+  border: rgba(0, 52, 137, 0.948) solid 1.8px;
+}
+
+/* ### CURRENTLY SELECTED CHOICE */
+
+.editingChoiceStrMdWrapper {
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  border: rgba(0, 52, 137, 0.438) solid 2px;
+  padding: 5px;
+}
+
+.editingChoiceStrInput {
+  width: 100%;
+  min-height: 3rem;
+  height: auto;
+  max-height: 6rem;
+  overflow: auto;
+  resize: none;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.editingChoiceMdWrapper {
+  padding: 10px;
+  border: none;
+
+  min-width: 500px;
+  width: fit-content;
+  max-width: 900px;
+
+  display: flex;
+}
+
+.editingChoiceButtons {
+  margin-left: auto;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+.saveEditedChoiceButton {
+  user-select: none;
+  height: 1.7rem;
+  background-color: rgba(62, 220, 23, 0.074);
+  border-radius: 10px;
+  border: rgba(62, 220, 23, 0.774) 1px solid;
+}
+.saveEditedChoiceButton:hover {
+  background-color: rgba(62, 220, 23, 0.124);
+}
+.saveEditedChoiceButton:active {
+  border: rgb(37, 157, 7) 1.5px solid;
+}
+
+.checkIcon {
+  opacity: 0.5;
+}
+.checkIcon:active {
+  opacity: 1;
+}
+
+.discardChangesEditedChoice {
+  height: 1.7rem;
+  user-select: none;
+  background-color: rgba(255, 255, 255, 0.077);
+  border-radius: 10px;
+  border: rgba(255, 0, 0, 0.29) 1px solid;
+  font-size: 1.1rem;
+  color: rgba(255, 0, 0, 0.29);
+}
+
+.discardChangesEditedChoice:hover {
+  background-color: rgba(255, 0, 0, 0.21);
+}
+
+.discardChangesEditedChoice:active {
+  border: rgba(255, 0, 0, 0.89) 1px solid;
+  color: rgba(255, 0, 0, 0.89);
+}
+
+.questionTags {
+  position: absolute;
+  right: 5%;
+  width: 25%;
+  height: 30%;
+  top: 55%;
+}
+
+.uploadButton {
+  margin-top: 20px;
+  background-color: black;
+  border: 2px solid #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.uploadButton:hover {
+  background-color: #333;
+}
+
+.uploadButton:focus,
+.uploadButton:active {
+  outline: none;
+  box-shadow: 0px 0px 5px 2px #333;
+  border-color: #999;
+  animation: border-color-cycle 1s ease-in-out infinite;
+}
+
+.uploadButton:active {
+  transform: scale(0.92);
+}
+
+@keyframes border-color-cycle {
+  0% {
+    border-color: #999;
+  }
+  50% {
+    border-color: #fff;
+  }
+  100% {
+    border-color: #999;
+  }
 }

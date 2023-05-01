@@ -24,6 +24,7 @@ specifiers:
   remark-gfm: ^3.0.1
   typescript: 4.9.5
   universal-cookie: ^4.0.4
+  uuid: ^9.0.0
 
 dependencies:
   '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
@@ -49,6 +50,7 @@ dependencies:
   remark-gfm: 3.0.1
   typescript: 4.9.5
   universal-cookie: 4.0.4
+  uuid: 9.0.0
 
 packages:
 
@@ -3537,6 +3539,11 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /uvu/0.5.6:
