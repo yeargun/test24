@@ -6,7 +6,7 @@
   max-width: 100%;
   width: fit-content;
   border-radius: 4vh;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
   padding: 0vh 6vh 0vh 6vh;
   text-align: left;
   margin: auto;
@@ -31,7 +31,7 @@
 .questionTextWrapper {
   z-index: 2;
   padding: 0vh 0vh 1vh 0vh;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
 
   /* margin: 0vh 0vh 5vh; */
   top: 10px;
@@ -97,7 +97,7 @@
   position: sticky;
   height: 5vh;
   z-index: 1;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
 }
 
 .expandWrapper {

@@ -46,7 +46,7 @@ function Header() {
         )}
       </Link> */}
       <Link
-        href="/upload"
+        href="/uploadQuestion"
         onMouseOver={(e) => setOnHoverUpload(true)}
         onMouseOut={(e) => setOnHoverUpload(false)}
         className={styles.wrapperLink}
@@ -58,10 +58,10 @@ function Header() {
           ) : (
             <Image
               draggable={false}
-              className={styles.headerIcon + "profile"}
-              src={"/settings-icon.png"}
-              alt={"settings-icon"}
-              width={40}
+              className={styles.headerIcon}
+              src={"/upload-icon.png"}
+              alt={"upload-icon"}
+              width={50}
               height={40}
             />
           )}
@@ -80,9 +80,9 @@ function Header() {
           ) : (
             <Image
               draggable={false}
-              className={styles.headerIcon + "profile"}
-              src={"/settings-icon.png"}
-              alt={"settings-icon"}
+              className={styles.headerIcon}
+              src={"/profile-icon.png"}
+              alt={"profile-icon"}
               width={40}
               height={40}
             />

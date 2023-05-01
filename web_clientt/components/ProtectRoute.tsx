@@ -10,7 +10,7 @@ export const ProtectRoute = ({ children }: any) => {
   }
   const unauthorized = useSelector(isUnauthorized);
   useLayoutEffect(() => {
-    if (username) router.push("concept1");
+    if (username) console.log("local storage got username so is valid");
     else router.push("/login");
   }, []);
 

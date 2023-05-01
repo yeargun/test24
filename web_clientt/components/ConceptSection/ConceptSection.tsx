@@ -1,3 +1,4 @@
+import ProgressBar from "components/ProgressBar/ProgressBar";
 import styles from "../../styles/ConceptSection.module.css";
 
 interface ConceptSection {
@@ -14,6 +15,7 @@ function ConceptSection({ concepts: concepts }: ConceptSection) {
     <>
       <div className={styles.concepts}>
         <header className={styles.conceptsText}>{conceptsString}</header>
+        <ProgressBar percent={50} />
       </div>
       <br />
     </>
