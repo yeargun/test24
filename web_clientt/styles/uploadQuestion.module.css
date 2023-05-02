@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   position: absolute;
   background-color: rgb(255, 255, 255);
 
@@ -8,6 +8,7 @@
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  overflow: auto;
 }
 
 .str2mdTable {
@@ -68,19 +69,40 @@
   margin-top: 15px;
   max-height: 40%;
   overflow: auto;
+  text-align: center;
 }
 
 .addedChoice {
-  padding: 10px;
+  padding: 2px 10px 2px 10px;
   border: 1.5px solid rgba(0, 52, 137, 0.548);
   border-radius: 5px;
-  margin-bottom: 10px;
 
   min-width: 500px;
   width: fit-content;
   max-width: 900px;
 
   display: flex;
+
+  align-items: center;
+
+  user-select: none;
+}
+
+.correctChoice {
+  padding: 2px 10px 2px 10px;
+  border: 3px solid rgba(0, 52, 137, 0.548);
+  border-radius: 5px;
+
+  min-width: 500px;
+  width: fit-content;
+  max-width: 900px;
+
+  display: flex;
+
+  align-items: center;
+
+  /* box-shadow: rgba(52, 208, 25, 0.548) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
 }
 
 .addedChoiceButtons {
@@ -88,6 +110,7 @@
 
   display: flex;
   gap: 5px;
+  align-items: center;
 }
 
 /* ##### */
@@ -98,6 +121,7 @@
   border: rgba(255, 0, 0, 0.29) 1px solid;
   font-size: 1.1rem;
   color: white;
+  height: fit-content;
   -webkit-text-stroke: 1px rgba(255, 0, 0, 0.666);
 }
 
@@ -116,7 +140,7 @@
   background-color: rgba(255, 255, 255, 0.077);
   border-radius: 20%;
   border: rgba(0, 0, 0, 0.545) 1px solid;
-
+  height: max-content;
   color: white;
 }
 
@@ -138,11 +162,13 @@
 
 .addExtraChoiceWrapper {
   padding: 10px;
-  margin-top: 15px;
+  margin-top: 5px;
+  width: 70%;
   color: rgba(0, 52, 137, 0.848);
   border: rgba(0, 52, 137, 0.548) solid 1px;
   border-radius: 15px;
   user-select: none;
+  display: inline-block;
 }
 
 .addExtraChoiceWrapper:hover {
@@ -157,7 +183,9 @@
 
 .editingChoiceStrMdWrapper {
   height: auto;
-  width: auto;
+  position: relative;
+  left: 5%;
+  width: 95%;
   border-radius: 10px;
   border: rgba(0, 52, 137, 0.438) solid 2px;
   padding: 5px;
@@ -177,10 +205,6 @@
 .editingChoiceMdWrapper {
   padding: 10px;
   border: none;
-
-  min-width: 500px;
-  width: fit-content;
-  max-width: 900px;
 
   display: flex;
 }
@@ -242,6 +266,7 @@
 
 .uploadButton {
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: black;
   border: 2px solid #333;
   color: white;
@@ -277,4 +302,42 @@
   100% {
     border-color: #999;
   }
+}
+
+.choiceAndTrueFalseWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.choiceAndTrueFalseWrapper input[type="radio"] {
+  /* hide the default radio button appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  /* set the custom radio button size */
+  width: 20px;
+  height: 20px;
+  /* set the custom radio button border and background */
+  border: 2px solid rgba(0, 52, 137, 0.548); /* greenish border */
+  border-radius: 50%; /* make it circular */
+  background-color: transparent; /* make the center transparent */
+}
+
+.choiceAndTrueFalseWrapper input[type="radio"]:checked {
+  border: rgba(0, 52, 137, 0.438) solid 2px;
+}
+
+.choiceAndTrueFalseWrapper input[type="radio"]:checked::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 20px;
+  width: 20px;
+  background-color: rgba(0, 52, 137, 0.238); /* greenish circle */
+  border-radius: 50%; /* make it circular */
 }

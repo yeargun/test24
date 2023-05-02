@@ -6,6 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import TagInput from "components/TagInput";
+import ImageUploader from "components/ImageUploader";
+import { useUploadQuestionMutation } from "features/question/questionApiSlice";
+// import { storage } from "../utils/firebase";
+// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // TODO: Enterla yeni şık eklemeye geçsin
 // TODO: Before upload popup should open and ask user if he wants to add tags
@@ -34,17 +38,37 @@ function UploadQuestion() {
 
   const [currentlyEditingChoiceStr, setCurrentlyEditingChoiceStr] =
     useState("");
+  const [imageURLs, setImageURLs] = useState([]);
+  const [imagesAreSelected, setImagesAreSelected] = useState(false);
+  const [shouldStartUploadingImages, setShouldStartUploadingImages] =
+    useState(false);
+  const [correctChoiceKey, setCorrectChoiceKey] = useState(undefined);
+
+  useEffect(() => {
+    // means question data is ready to get uploaded with imageurls
+    if (imageURLs.length > 0) {
+      uploadQuestion({
+        questionText,
+        choices,
+        rightChoice: 1,
+        imageURLs,
+      });
+    }
+  }, [imageURLs]);
+
+  const [uploadQuestion, { isLoading }] = useUploadQuestionMutation();
+  const dispatch = useDispatch();
 
   const questionTextChangeHandler = (e) => {
     setQuestionText(e.target.value);
   };
 
-  const handleAddedQuestionSelected = (index) => {
-    console.log("this index selected", index);
-  };
-
   const handleEditingChoiceStrChange = (e) => {
     setCurrentlyEditingChoiceStr(e.target.value);
+  };
+
+  const handleSetImageURLs = (imageURLs) => {
+    setImageURLs((prevState) => imageURLs);
   };
 
   const handleSaveEditedChoice = (key) => {
@@ -81,8 +105,20 @@ function UploadQuestion() {
     setChoices(updatedObject);
   };
 
-  const uploadQuestion = () => {
-    console.log("update question");
+  const handleUploadQuestion = () => {
+    console.log("upload question");
+    if (Object.entries(choices).length > 0 && questionText) {
+      console.log("@@");
+      if (imagesAreSelected) setShouldStartUploadingImages(true);
+      else {
+        uploadQuestion({
+          questionText,
+          choices,
+          rightChoice: 1,
+          imageURLs,
+        });
+      }
+    }
   };
 
   const currentlySelectedChoice = (key, text) => (
@@ -124,9 +160,23 @@ function UploadQuestion() {
     </div>
   );
 
+  const handleSetImagesAreSelected = (bool) => {
+    setImagesAreSelected(bool);
+  };
+
+  const handleCorrectChoiceChange = (key) => {
+    if (key === correctChoiceKey) setCorrectChoiceKey(undefined);
+    else setCorrectChoiceKey(key);
+  };
+
+  const correctChoiceStyling = (key) => {
+    if (key === correctChoiceKey) return styles.correctChoice;
+    else return styles.addedChoice;
+  };
+
   return (
     <div className={styles.page}>
-      <h1>Upload a question</h1>
+      <h1 style={{ margin: "45px 0px 2px 0px" }}></h1>
       <div className={styles.str2mdTable}>
         <div className={styles.tabs}>
           <div className={styles.strTab}>Question-text</div>
@@ -149,39 +199,66 @@ function UploadQuestion() {
         </div>
       </div>
 
+      <ImageUploader
+        shouldStartUploadingImages={shouldStartUploadingImages}
+        setImageURLs={handleSetImageURLs}
+        setImagesAreSelected={handleSetImagesAreSelected}
+      />
+
       <div className={styles.choices}>
         {Object.entries(choices).map(([key, value]) => {
-          console.log("currentlyEditingChoiceId", currentlyEditingChoiceId);
-          console.log("item.key", key);
-          console.log(key == currentlyEditingChoiceId);
-
           if (key == currentlyEditingChoiceId) {
             return currentlySelectedChoice(key, value);
           } else
             return (
-              <div onClick={() => {}} className={styles.addedChoice}>
-                <div className={styles.addedChoiceMdContent}>{value}</div>
-
-                <div className={styles.addedChoiceButtons}>
-                  <button
-                    className={styles.editAddedChoiceButton}
-                    onClick={(e) => handleChoiceEditButtonPress(key, value)}
+              <div
+                onClick={(e) => handleCorrectChoiceChange(key)}
+                className={styles.choiceAndTrueFalseWrapper}
+              >
+                <input
+                  style={{ marginTop: 0, marginBottom: 0 }}
+                  name="correct-choice"
+                  type="radio"
+                  checked={correctChoiceKey === key}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleCorrectChoiceChange(key);
+                  }}
+                />
+                <div onClick={() => {}} className={correctChoiceStyling(key)}>
+                  <ReactMarkdown
+                    className={styles.addedChoiceMdContent}
+                    remarkPlugins={[remarkGfm]}
                   >
-                    <Image
-                      className={styles.editIcon}
-                      draggable={false}
-                      src={"/edit-icon.svg"}
-                      alt={"edit-icon"}
-                      width={10}
-                      height={10}
-                    />
-                  </button>
-                  <button
-                    onClick={(e) => removeChoiceWithKey(key)}
-                    className={styles.removeAddedChoiceButton}
-                  >
-                    -
-                  </button>
+                    {value}
+                  </ReactMarkdown>
+                  <div className={styles.addedChoiceButtons}>
+                    <button
+                      className={styles.editAddedChoiceButton}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Stop the event from bubbling up to the parent div
+                        handleChoiceEditButtonPress(key, value);
+                      }}
+                    >
+                      <Image
+                        className={styles.editIcon}
+                        draggable={false}
+                        src={"/edit-icon.svg"}
+                        alt={"edit-icon"}
+                        width={10}
+                        height={10}
+                      />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeChoiceWithKey(key);
+                      }}
+                      className={styles.removeAddedChoiceButton}
+                    >
+                      -
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -195,7 +272,7 @@ function UploadQuestion() {
       </div>
 
       {/* <TagInput className={styles.questionTags} /> */}
-      <button className={styles.uploadButton} onClick={uploadQuestion}>
+      <button className={styles.uploadButton} onClick={handleUploadQuestion}>
         Upload
       </button>
     </div>
