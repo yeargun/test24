@@ -341,3 +341,55 @@
   background-color: rgba(0, 52, 137, 0.238); /* greenish circle */
   border-radius: 50%; /* make it circular */
 }
+
+/* ######*/
+
+.explanationStr2md {
+  margin-top: 15px;
+  min-width: 55%;
+  min-height: 2%;
+  max-width: 90%;
+  max-height: 80%;
+  height: fit-content;
+  /* width: fit-content; */
+
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top: 20%; */
+  /* transform: translateX(-50%); */
+
+  border: rgba(5, 46, 169, 0.378) solid 1px;
+  padding: 10px;
+}
+
+.explanationTabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.explanationTableTitle {
+  width: 100%;
+  text-align: center;
+}
+
+.explanationContents {
+  /* flex: 1; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.explanationTextContent {
+  min-width: 300px;
+  width: 50%;
+  height: 100%;
+  height: auto;
+  border: none;
+  border-right: black solid 3px;
+  resize: horizontal;
+}
+
+.explanationMdContent {
+  /* flex: 1; */
+  margin-left: 20px;
+  width: 50%;
+}

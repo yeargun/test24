@@ -43,18 +43,25 @@ function UploadQuestion() {
   const [shouldStartUploadingImages, setShouldStartUploadingImages] =
     useState(false);
   const [correctChoiceKey, setCorrectChoiceKey] = useState(undefined);
+  const [explanationText, setExplanationText] = useState();
 
   useEffect(() => {
     // means question data is ready to get uploaded with imageurls
     if (imageURLs.length > 0) {
       uploadQuestion({
         questionText,
-        choices,
-        rightChoice: 1,
-        imageURLs,
+        choices: Object.values(choices),
+        rightChoice: getChoiceIndexByKey(correctChoiceKey),
+        imageURLs: imageURLs,
+        explanation: explanationText,
       });
     }
   }, [imageURLs]);
+
+  const getChoiceIndexByKey = (key) => {
+    const keys = Object.keys(choices);
+    return keys.indexOf(key);
+  };
 
   const [uploadQuestion, { isLoading }] = useUploadQuestionMutation();
   const dispatch = useDispatch();
@@ -108,9 +115,13 @@ function UploadQuestion() {
   const handleUploadQuestion = () => {
     console.log("upload question");
     if (Object.entries(choices).length > 0 && questionText) {
-      console.log("@@");
+      console.log("@@images are selcted?", imagesAreSelected);
+      //formikwho?
       if (imagesAreSelected) setShouldStartUploadingImages(true);
-      else {
+      else if (correctChoiceKey == undefined) {
+        //warn you should select right choice
+        console.log("warn you should select right choice");
+      } else {
         uploadQuestion({
           questionText,
           choices,
@@ -160,8 +171,48 @@ function UploadQuestion() {
     </div>
   );
 
+  const openedExplanation = () => (
+    <div key={key} className={styles.editingChoiceStrMdWrapper}>
+      <textarea
+        placeholder="enter the choice.."
+        className={styles.editingChoiceStrInput}
+        value={explanationText}
+        onChange={handleEditingChoiceStrChange}
+      />
+      <div className={styles.editingChoiceMdWrapper}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {explanationText}
+        </ReactMarkdown>
+
+        {/* this should be check mark and close editing button */}
+        <div className={styles.editingChoiceButtons}>
+          <button
+            className={styles.saveEditedChoiceButton}
+            onClick={(e) => handleSaveEditedChoice(key)}
+          >
+            <Image
+              className={styles.checkIcon}
+              draggable={false}
+              src={"/check-icon.svg"}
+              alt={"check-icon"}
+              width={10}
+              height={10}
+            />
+          </button>
+          <button
+            className={styles.discardChangesEditedChoice}
+            onClick={(e) => handleDiscardEditedChoice(key)}
+          >
+            x
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   const handleSetImagesAreSelected = (bool) => {
-    setImagesAreSelected(bool);
+    setImagesAreSelected((prevState) => bool);
+    console.log("imagesAreSelected?", imagesAreSelected);
   };
 
   const handleCorrectChoiceChange = (key) => {
@@ -172,6 +223,10 @@ function UploadQuestion() {
   const correctChoiceStyling = (key) => {
     if (key === correctChoiceKey) return styles.correctChoice;
     else return styles.addedChoice;
+  };
+
+  const explanationTextChangeHandler = (e) => {
+    setExplanationText(e.target.value);
   };
 
   return (
@@ -268,6 +323,28 @@ function UploadQuestion() {
           onClick={addAnotherChoice}
         >
           Add another choice..
+        </div>
+      </div>
+
+      <div className={styles.explanationStr2md}>
+        <div className={styles.explanationTableTitle}>
+          explanation(recommended)
+        </div>
+
+        <hr />
+        <div className={styles.explanationContents}>
+          <textarea
+            value={explanationText}
+            className={styles.explanationTextContent}
+            placeholder="enter text..."
+            onChange={explanationTextChangeHandler}
+          />
+          <div className={styles.explanationMdContent}>
+            {/* sdfsdff */}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {explanationText}
+            </ReactMarkdown>
+          </div>
         </div>
       </div>
 

@@ -32,6 +32,11 @@ const ImageUploader = ({
     const sizes = files.map((file) => file.size);
     setFileNames([...fileNames, ...names]);
     setFileSizes([...fileSizes, ...sizes]);
+    if (files.length > 0) {
+      setImagesAreSelected(true);
+    } else {
+      setImagesAreSelected(false);
+    }
   };
 
   const handleRemoveFile = (indexToRemove) => {
