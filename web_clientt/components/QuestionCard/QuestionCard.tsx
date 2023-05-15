@@ -2,6 +2,9 @@ import styles from "../../styles/QuestionCard.module.css";
 import Image from "next/image";
 import AnswerSection from "components/AnswerSection/AnswerSection";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 interface QuestionCard {
   questionText: string;
   //cdn man :ok:
@@ -53,7 +56,10 @@ function QuestionCard({
         <div className={styles.questionCardHeaderBackground}></div>
       )}
       <div className={styles.questionTextWrapper}>
-        <p className={styles.questionText}>{questionText}</p>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {questionText}
+        </ReactMarkdown>
+        {/* <p className={styles.questionText}>{}</p> */}
       </div>
       <div className={styles.imageWrapper}>
         <Image

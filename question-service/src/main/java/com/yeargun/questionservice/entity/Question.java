@@ -1,34 +1,54 @@
 package com.yeargun.questionservice.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
 
+@Entity
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="questions")
+@Builder
+@Table(name="Question")
 public class Question {
 
-    @Id
-    private String id;
 
-    @Indexed(unique=true)
-    private String questionId;
+    @Id
+    @GeneratedValue
+    private Integer id;
+
     private String questionText;
+
+
+    private String username;
+
+    @ElementCollection
+    @CollectionTable(name = "question_choices", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "choice")
     private List<String> choices;
+
+    @ElementCollection
+    @CollectionTable(name = "question_concepts", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "concept")
     private List<String> concepts;
+
+    @ElementCollection
+    @CollectionTable(name = "question_images", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "image")
+    private List<String> imageURLs;
+
     private String explanation;
     private int answerChoiceId;
 
-    public Question(String questionId, String questionText, List<String> choices, String explanation, int answerChoiceId) {
-        this.questionId = questionId;
+    public Question(String questionText, List<String> choices, List<String> concepts, String explanation, int answerChoiceId) {
         this.questionText = questionText;
         this.choices = choices;
+        this.concepts = concepts;
         this.explanation = explanation;
         this.answerChoiceId = answerChoiceId;
     }

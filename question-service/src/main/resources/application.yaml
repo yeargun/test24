@@ -1,13 +1,13 @@
 spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/questions
-#      authentication-database: admin
-#      username: rootuser
-#      password: rootpass
-      database: questions
-      port: 27017
-      host: localhost
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/questions
+##      authentication-database: admin
+##      username: rootuser
+##      password: rootpass
+#      database: questions
+#      port: 27017
+#      host: localhost
 
 #  MYSQL
   datasource:

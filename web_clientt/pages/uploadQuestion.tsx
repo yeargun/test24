@@ -124,9 +124,9 @@ function UploadQuestion() {
       } else {
         uploadQuestion({
           questionText,
-          choices,
-          rightChoice: 1,
-          imageURLs,
+          choices: Object.values(choices),
+          rightChoice: getChoiceIndexByKey(correctChoiceKey),
+          explanation: explanationText,
         });
       }
     }

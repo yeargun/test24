@@ -15,7 +15,7 @@ const questionSlice = createSlice({
     setNextQuestion: (state, action) => {
       state.choices = action.payload.choices;
       state.questionText = action.payload.questionText;
-      state.questionId = action.payload.questionId;
+      state.questionId = action.payload.id;
       state.explanation = undefined;
       state.rightChoiceId = undefined;
     },

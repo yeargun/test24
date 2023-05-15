@@ -19,10 +19,9 @@ public class QuestionService {
     public List<Question> getAllQuestions(){return repository.findAll();}
 
     public Optional<QuestionDTO> getQuestionByQuestionId( String id) {
-        return Optional.ofNullable(repository.findAllByQuestionId(id)
+        return Optional.ofNullable(repository.findById(id)
                 .stream()
                 .map(question -> new QuestionDTO(
-                        question.getQuestionId(),
                         question.getQuestionText(),
                         question.getChoices(),
                         question.getConcepts()
@@ -45,10 +44,12 @@ public class QuestionService {
     }
 
     public QuestionAnswerResponseDTO handleQuestionAnswer(QuestionAnswerDTO answerFromUser) {
-        Optional<Question> question =  repository.findAllByQuestionId(answerFromUser.getQuestionId());
+        Optional<Question> question =  repository.findById(answerFromUser.getQuestionId());
         QuestionAnswerResponseDTO response = new QuestionAnswerResponseDTO();
         if(!question.isPresent())
             return null;
+
+
 
         response.setExplanation(question.get().getExplanation());
         response.setRightChoiceId(question.get().getAnswerChoiceId());
@@ -56,15 +57,19 @@ public class QuestionService {
 
     }
 
-    public void uploadQuestion(Question question) {
-        repository.insert(
-                new Question(
-                        question.getQuestionId(),
-                        question.getQuestionText(),
-                        question.getChoices(),
-                        question.getExplanation(),
-                        question.getAnswerChoiceId()
-                )
+    public void uploadQuestion(UploadQuestionDTO uploadRequest, String username) {
+        Question question1 = new Question().builder()
+                        .questionText(uploadRequest.getQuestionText())
+                        .choices(uploadRequest.getChoices())
+                        .answerChoiceId(uploadRequest.getRightChoice())
+                        .concepts(uploadRequest.getConcepts())
+                        .imageURLs(uploadRequest.getImageURLs())
+                        .username(username)
+                            .build();
+
+
+        repository.save(
+                question1
         );
     }
 }

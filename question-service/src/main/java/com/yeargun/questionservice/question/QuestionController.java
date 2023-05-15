@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +29,10 @@ public class QuestionController {
         return ResponseEntity.ok(service.getNextQuestion());
     }
 
-    @PostMapping("/uploadQuestion")
-    public int uploadQuestion(@RequestBody Question question){
-        service.uploadQuestion(question);
+    @PostMapping("/upload")
+    public int uploadQuestion(Authentication authentication, @RequestBody UploadQuestionDTO request){
+        String loggedInUsername = authentication.getName();
+        service.uploadQuestion(request, loggedInUsername);
         return 0;
     }
     
