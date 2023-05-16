@@ -4,11 +4,11 @@
   min-width: 60%;
   width: fit-content;
 
-  padding: 5px;
+  padding: 0.8rem;
   min-height: 4vh;
   max-height: 8vh;
   border-radius: 7vh;
-  margin-bottom: 20px;
+  margin-bottom: 1.3vh;
   display: flex;
   align-items: center;
 
@@ -24,8 +24,8 @@
   -o-user-select: none;
   user-select: none;
 
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(193, 193, 193),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 0.1rem rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 .conceptsText {

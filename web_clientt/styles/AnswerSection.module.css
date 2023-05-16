@@ -24,13 +24,13 @@
 
 .nonSelectedChoice input[type="radio"]:checked {
   visibility: hidden;
-  margin: 0px;
+  margin: 0;
 }
 
 .nonSelectedChoice input[type="radio"] {
   visibility: hidden;
-  width: 0px;
-  margin: 0px;
+  width: 0;
+  margin: 0;
 }
 
 .selectedChoice {
@@ -51,13 +51,13 @@
 
 .selectedChoice input[type="radio"]:checked {
   visibility: hidden;
-  margin: 0px;
+  margin: 0;
 }
 
 .selectedChoice input[type="radio"] {
   visibility: hidden;
-  width: 0px;
-  margin: 0px;
+  width: 0;
+  margin: 0;
 }
 
 .submitButton {
@@ -110,13 +110,13 @@
 
 .correctChoice input[type="radio"]:checked {
   visibility: hidden;
-  margin: 0px;
+  margin: 0;
 }
 
 .correctChoice input[type="radio"] {
   visibility: hidden;
-  width: 0px;
-  margin: 0px;
+  width: 0;
+  margin: 0;
 }
 
 .faultyAnswerChoice {
@@ -136,13 +136,13 @@
 
 .faultyAnswerChoice input[type="radio"]:checked {
   visibility: hidden;
-  margin: 0px;
+  margin: 0;
 }
 
 .faultyAnswerChoice input[type="radio"] {
   visibility: hidden;
-  width: 0px;
-  margin: 0px;
+  width: 0;
+  margin: 0;
 }
 
 .form div:hover {

@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 30px;
+  padding-bottom: 2vh;
 }
 
 /* header style */
@@ -25,19 +25,19 @@
 .page .header .logo,
 .page .header p,
 .page .header button {
-  margin-bottom: 15px;
+  margin-bottom: 1.3vh;
 }
 
 .page .header > p {
   font-weight: bold;
   color: #8e8e8e;
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 .page .header > button {
   width: inherit;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.7rem;
   border: none;
   background-color: #000000;
   color: #ffffff;
@@ -52,11 +52,11 @@
 }
 
 .page .header div p {
-  padding: 0 20px;
+  padding: 0 1.3rem;
 }
 
 .page .header div hr {
-  width: 200px;
+  width: 7rem;
 }
 
 /* container style*/
@@ -70,31 +70,44 @@
 }
 
 .page .container .form input {
-  border: 1px solid #dbdbdb;
+  border: 0.05rem solid #dbdbdb;
+  border-radius: 0.4rem;
   background-color: #fafafa;
-  padding: 10px 5px;
-  margin: 5px 0;
+  padding: 0.7rem 0.35rem;
+  margin: 0.4rem 0;
   width: inherit;
 }
 
 .page .container form input:last-of-type {
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .formButton {
   width: inherit;
-  margin-bottom: 20px;
-  padding: 7px 5px;
-  border-radius: 5px;
-  border: 2px solid rgb(116, 116, 116);
-  background: linear-gradient(135deg, #9ca24b 25%, transparent 25%) -50px 0,
-    linear-gradient(225deg, #233f88 25%, transparent 25%) -50px 0,
-    linear-gradient(315deg, #eceddc 25%, transparent 25%),
-    linear-gradient(45deg, #eceddc 25%, transparent 25%);
-  background-size: 30px 34px;
-  background-color: #e0acb4;
-  color: #291125;
-  font-weight: 1000;
+
+  background-color: black;
+  border: 0.1rem solid #333;
+  color: white;
+  padding: 0.5rem 0.1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.formButton:hover {
+  background-color: #333;
+}
+
+.formButton:focus,
+.formButton:active {
+  outline: none;
+  box-shadow: 0 0 0.5rem 0.1rem #333;
+  border-color: #999;
+  animation: border-color-cycle 1s ease-in-out infinite;
+}
+
+.formButton:active {
+  transform: scale(0.92);
 }
 
 .page .container ul {
@@ -126,13 +139,13 @@
 }
 
 .otherapps p {
-  margin-bottom: 15px;
+  margin-bottom: 1.2rem;
 }
 
 .otherapps > button {
   cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   background-color: black;
   color: white;
   padding: 10px;
