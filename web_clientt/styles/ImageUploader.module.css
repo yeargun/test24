@@ -26,3 +26,9 @@
   border: rgba(255, 0, 0, 0.89) 1px solid;
 }
 /* ##### */
+
+.imagePreviewWrapper {
+  display: flex;
+  width: auto;
+  height: auto;
+}

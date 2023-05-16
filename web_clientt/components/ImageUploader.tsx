@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import { storage } from "../utils/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import styles from "../styles/ImageUploader.module.css";
-
+import Image from "next/image";
+import { previewLoadedImages } from "./previewLoadedImages";
 const ImageUploader = ({
   setImageURLs,
   shouldStartUploadingImages,
@@ -27,7 +28,8 @@ const ImageUploader = ({
         file.size < validSize &&
         selectedImages.length < 5 // max 5 files
     );
-    setSelectedImages([...selectedImages, ...files]);
+    setSelectedImages((prevState) => [...selectedImages, ...files]);
+    previewLoadedImages();
     const names = files.map((file) => file.name);
     const sizes = files.map((file) => file.size);
     setFileNames([...fileNames, ...names]);
@@ -87,7 +89,14 @@ const ImageUploader = ({
         </ul>
       </div>
       {fileNames?.length > 0 && <hr />}
-      <input type="file" multiple onChange={handleFileInput} accept="image/*" />
+      <input
+        id="image-upload"
+        type="file"
+        multiple
+        onChange={handleFileInput}
+        accept="image/*"
+      />
+      <div id="preview-container" className={styles.imagePreviewWrapper}></div>
     </div>
   );
 };
