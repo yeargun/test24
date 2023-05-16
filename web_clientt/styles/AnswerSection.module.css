@@ -9,6 +9,7 @@
 
 .nonSelectedChoice {
   border: rgba(0, 0, 0, 0.2) solid;
+  display: flex;
 
   border-radius: 2vh;
   background-color: rgb(230, 230, 230);
@@ -16,6 +17,9 @@
   margin: 1.2vh;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.15),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+.nonSelectedChoice p {
+  margin: 0;
 }
 
 .nonSelectedChoice input[type="radio"]:checked {
@@ -30,6 +34,8 @@
 }
 
 .selectedChoice {
+  display: flex;
+
   border-radius: 2vh;
   font-weight: bold;
   background-color: rgba(159, 191, 254, 0.1);
@@ -38,6 +44,9 @@
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   border: rgba(0, 0, 0, 0.15) solid;
+}
+.selectedChoice p {
+  margin: 0;
 }
 
 .selectedChoice input[type="radio"]:checked {
@@ -84,6 +93,8 @@
 }
 
 .correctChoice {
+  display: flex;
+
   border-radius: 2vh;
   font-weight: bold;
   background-color: rgba(70, 233, 25, 0.197);
@@ -92,6 +103,9 @@
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   border: rgba(0, 0, 0, 0.15) solid;
+}
+.correctChoice p {
+  margin: 0;
 }
 
 .correctChoice input[type="radio"]:checked {
@@ -106,6 +120,7 @@
 }
 
 .faultyAnswerChoice {
+  display: flex;
   border-radius: 2vh;
   font-weight: bold;
   background-color: rgba(255, 0, 0, 0.325);
@@ -114,6 +129,9 @@
   border: rgba(0, 0, 0, 0.15) solid;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+.faultyAnswerChoice p {
+  margin: 0;
 }
 
 .faultyAnswerChoice input[type="radio"]:checked {

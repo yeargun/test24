@@ -38,9 +38,8 @@ function QuestionCard({
   };
 
   const answerExplanationComponent = explanation && (
-    // npm react-markdown maybe
     <>
-      <p>{explanation}</p>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown>
       <div className={styles.expandWrapper}>
         <hr />
         <button onClick={expandExplanation}>expand</button>

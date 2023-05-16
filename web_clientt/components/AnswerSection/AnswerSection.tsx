@@ -1,10 +1,10 @@
 import { useState, useEffect, FormEvent } from "react";
 import styles from "../../styles/AnswerSection.module.css";
-// import { ARGUN } from "../../utils/api/axios";
-// import { AnswerResponse } from "./AnswerResponse";
 import { useDispatch, useSelector } from "react-redux";
 import { useSendAnswerMutation } from "features/question/questionApiSlice";
 import { setRightQuestionDetails } from "features/question/questionSlice";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface AnswerSection {
   choices: string[];
@@ -82,9 +82,9 @@ function AnswerSection({ choices, rightChoiceId, questionId }: AnswerSection) {
                 value={index}
               />
               <label key={index} htmlFor={index.toString()}>
-                {/* to display choice labels */}
-                {/* <div className="a-b-c going to be">{id}</div> */}
-                {choice}
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {choice}
+                </ReactMarkdown>
               </label>
             </div>
           ))}
