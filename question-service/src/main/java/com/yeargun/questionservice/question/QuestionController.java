@@ -20,8 +20,9 @@ public class QuestionController {
     private QuestionService service;
 
     @PostMapping("/sendAnswer")
-    public QuestionAnswerResponseDTO answerQuestion(@RequestBody QuestionAnswerDTO answer){
-        return service.handleQuestionAnswer(answer);
+    public QuestionAnswerResponseDTO answerQuestion(Authentication authentication,@RequestBody QuestionAnswerDTO answer){
+        String loggedInUsername = authentication.getName();
+        return service.handleQuestionAnswer(answer, loggedInUsername);
     }
 
     @GetMapping("/next")

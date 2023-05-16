@@ -2,7 +2,11 @@ package com.yeargun.questionservice.question;
 
 
 import com.yeargun.questionservice.entity.Question;
+import com.yeargun.questionservice.entity.User;
+import com.yeargun.questionservice.entity.UserAnswer;
 import com.yeargun.questionservice.repository.QuestionRepository;
+import com.yeargun.questionservice.repository.UserAnswerRepository;
+import com.yeargun.questionservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +18,21 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     @Autowired
-    private QuestionRepository repository;
+    private QuestionRepository questionRepository;
 
-    public List<Question> getAllQuestions(){return repository.findAll();}
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    UserAnswerRepository userAnswerRepository;
+
+    public List<Question> getAllQuestions(){return questionRepository.findAll();}
 
     public Optional<QuestionDTO> getQuestionByQuestionId( String id) {
-        return Optional.ofNullable(repository.findById(id)
+        return Optional.ofNullable(questionRepository.findById(id)
                 .stream()
                 .map(question -> new QuestionDTO(
+                        question.getId(),
                         question.getQuestionText(),
                         question.getChoices(),
                         question.getConcepts()
@@ -43,11 +54,25 @@ public class QuestionService {
         return null;
     }
 
-    public QuestionAnswerResponseDTO handleQuestionAnswer(QuestionAnswerDTO answerFromUser) {
-        Optional<Question> question =  repository.findById(answerFromUser.getQuestionId());
-        QuestionAnswerResponseDTO response = new QuestionAnswerResponseDTO();
+    public QuestionAnswerResponseDTO handleQuestionAnswer(QuestionAnswerDTO answerFromUser, String username) {
+        Optional<Question> question =  questionRepository.findById(answerFromUser.getQuestionId());
         if(!question.isPresent())
             return null;
+
+        Optional<User> user =  userRepository.findByUsername(username);
+
+
+        UserAnswer userAnswer = new UserAnswer().builder()
+                .answer(answerFromUser.getChoosenChoiceId())
+                .user(user.get())
+                .question(question.get())
+                .build();
+        userAnswerRepository.save(userAnswer);
+
+
+
+        QuestionAnswerResponseDTO response = new QuestionAnswerResponseDTO();
+
 
 
 
@@ -65,10 +90,11 @@ public class QuestionService {
                         .concepts(uploadRequest.getConcepts())
                         .imageURLs(uploadRequest.getImageURLs())
                         .username(username)
+                        .explanation(uploadRequest.getExplanation())
                             .build();
 
 
-        repository.save(
+        questionRepository.save(
                 question1
         );
     }

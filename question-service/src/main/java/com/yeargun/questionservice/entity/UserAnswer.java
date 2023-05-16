@@ -26,5 +26,5 @@ public class UserAnswer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    private String answer;
+    private int answer;
 }
