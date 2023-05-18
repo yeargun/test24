@@ -7,144 +7,73 @@
   margin: 0vh 0vh 4vh 0vh;
 }
 
-.nonSelectedChoice {
-  border: rgba(0, 0, 0, 0.2) solid;
+.choice {
+  border: rgba(0, 0, 0, 0.1) solid;
   display: flex;
 
   border-radius: 2vh;
-  background-color: rgb(230, 230, 230);
   padding: 1.2vh;
   margin: 1.2vh;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.15),
-    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-}
-.nonSelectedChoice p {
-  margin: 0;
 }
 
-.nonSelectedChoice input[type="radio"]:checked {
+.choice input[type="radio"]:checked {
   visibility: hidden;
   margin: 0;
 }
 
-.nonSelectedChoice input[type="radio"] {
+.choice input[type="radio"] {
   visibility: hidden;
   width: 0;
   margin: 0;
+}
+
+.choice p {
+  margin: 0;
+}
+
+.nonSelectedChoice {
+  box-shadow: 0 0 0.3rem 0.1px rgb(193, 193, 193),
+    0.3em 0.3em 1em rgba(223, 223, 223, 0.3);
+}
+.nonSelectedChoice:hover {
+  background-color: rgba(59, 59, 59, 0.164);
 }
 
 .selectedChoice {
-  display: flex;
-
-  border-radius: 2vh;
-  font-weight: bold;
   background-color: rgba(159, 191, 254, 0.1);
-  padding: 0.8vh;
-  margin: 0.7vh;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  border: rgba(0, 0, 0, 0.15) solid;
-}
-.selectedChoice p {
-  margin: 0;
 }
 
-.selectedChoice input[type="radio"]:checked {
-  visibility: hidden;
-  margin: 0;
+.correctChoice {
+  font-weight: bold;
+  background-color: rgba(70, 233, 25, 0.197);
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-.selectedChoice input[type="radio"] {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
+.faultyAnswerChoice {
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.325);
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 .submitButton {
   /* TODO: yeargun, submit butonu pozisyonu soru widthine göre sekillenmiyo */
   position: fixed;
+
   right: 5vh;
   top: 50%;
   transform: translateY(-50%);
+  padding: 0.7rem;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
-  border: 0.1vh solid black;
+  border-radius: 1rem;
+  border: 0.05rem solid black;
 
-  width: 10vh;
-  height: 4vh;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-
-  background-color: #edecec;
-
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-
-  /* animation: ripple 1s; */
-}
-
-.correctChoice {
-  display: flex;
-
-  border-radius: 2vh;
-  font-weight: bold;
-  background-color: rgba(70, 233, 25, 0.197);
-  padding: 0.8vh;
-  margin: 0.7vh;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  border: rgba(0, 0, 0, 0.15) solid;
-}
-.correctChoice p {
-  margin: 0;
-}
-
-.correctChoice input[type="radio"]:checked {
-  visibility: hidden;
-  margin: 0;
-}
-
-.correctChoice input[type="radio"] {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
-}
-
-.faultyAnswerChoice {
-  display: flex;
-  border-radius: 2vh;
-  font-weight: bold;
-  background-color: rgba(255, 0, 0, 0.325);
-  padding: 0.8vh;
-  margin: 0.7vh;
-  border: rgba(0, 0, 0, 0.15) solid;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-}
-.faultyAnswerChoice p {
-  margin: 0;
-}
-
-.faultyAnswerChoice input[type="radio"]:checked {
-  visibility: hidden;
-  margin: 0;
-}
-
-.faultyAnswerChoice input[type="radio"] {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
-}
-
-.form div:hover {
-  font-weight: 600;
 }

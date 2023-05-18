@@ -1,10 +1,10 @@
 .concepts {
-  background-color: rgb(204, 204, 204);
+  background-color: rgba(204, 204, 204, 0.307);
   max-width: 90%;
   min-width: 60%;
   width: fit-content;
 
-  padding: 0.8rem;
+  padding: 0.7rem;
   min-height: 4vh;
   max-height: 8vh;
   border-radius: 7vh;
@@ -17,15 +17,12 @@
   left: 50%;
   transform: translate(-50%);
 
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
   user-select: none;
 
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 0 0.1rem rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.686);
+
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.064),
+    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 .conceptsText {

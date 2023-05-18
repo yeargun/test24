@@ -26,14 +26,21 @@ function AnswerSection({ choices, rightChoiceId, questionId }: AnswerSection) {
   }, [questionId]);
 
   const questionChoiceStyling = (index: number) => {
+    let commonStyle = `${styles.choice} `;
+
     if (rightChoiceId != undefined && rightChoiceId != null) {
-      if (index == rightChoiceId) return styles.correctChoice;
+      if (index == rightChoiceId)
+        return commonStyle + ` ${styles.correctChoice}`;
       else if (index != rightChoiceId && index == selectedChoiceId)
-        return styles.faultyAnswerChoice;
-      else return styles.nonSelectedChoice;
+        return commonStyle + ` ${styles.faultyAnswerChoice}`;
+      else return commonStyle + ` ${styles.nonSelectedChoice}`;
     } else {
-      if (index == selectedChoiceId) return styles.selectedChoice;
-      else return styles.nonSelectedChoice;
+      if (index == selectedChoiceId)
+        return commonStyle + ` ${styles.selectedChoice}`;
+      else {
+        return commonStyle + ` ${styles.nonSelectedChoice}`;
+        console.log("questionlogstyling dd", commonStyle);
+      }
     }
   };
 
@@ -41,7 +48,6 @@ function AnswerSection({ choices, rightChoiceId, questionId }: AnswerSection) {
     e.preventDefault();
     try {
       if (selectedChoiceId == null || selectedChoiceId == undefined) return;
-      // setSelectedChoiceId(undefined);
       const { rightChoiceId, explanation } = await sendAnswer({
         questionId,
         choosenChoiceId: selectedChoiceId,

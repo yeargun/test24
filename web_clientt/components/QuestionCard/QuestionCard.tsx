@@ -58,7 +58,6 @@ function QuestionCard({
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {questionText}
         </ReactMarkdown>
-        {/* <p className={styles.questionText}>{}</p> */}
       </div>
       <div className={styles.imageWrapper}>
         <Image
