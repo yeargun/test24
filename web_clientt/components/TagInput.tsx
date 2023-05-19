@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import styles from "../styles/TagInput.module.css";
 
-function TagInput({ className }) {
-  const [tags, setTags] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
+function TagInput({
+  className,
+  tags,
+  addTag,
+  removeTag,
+  inputValue,
+  handleInputChange,
+}) {
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.key === ",") {
       event.preventDefault();
@@ -15,23 +16,12 @@ function TagInput({ className }) {
     }
   };
 
-  const addTag = () => {
-    const tag = inputValue.trim();
-    if (tag && !tags.includes(tag)) {
-      setTags([...tags, tag]);
-      setInputValue("");
-    }
-  };
-
-  const removeTag = (tag) => {
-    const newTags = tags.filter((t) => t !== tag);
-    setTags(newTags);
-  };
+  console.log("got this as tags", tags);
 
   return (
     <div className={className}>
-      <div>
-        {tags.map((tag) => (
+      <div className={styles.tagsWrapper}>
+        {tags?.map((tag) => (
           <div key={tag} className="tag">
             {tag}
             <button onClick={() => removeTag(tag)}>X</button>
@@ -42,7 +32,7 @@ function TagInput({ className }) {
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        placeholder="Add tags separated by commas"
+        placeholder="Add tags separated by commas (max 8 tags)"
       />
     </div>
   );

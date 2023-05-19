@@ -44,6 +44,33 @@ function UploadQuestion() {
     useState(false);
   const [correctChoiceKey, setCorrectChoiceKey] = useState(undefined);
   const [explanationText, setExplanationText] = useState();
+  const [generateCustomHasSelected, setGenerateCustomHasSelected] =
+    useState<Boolean>(false);
+  const [generateFromTextHasSelected, setGenerateFromTextHasSelected] =
+    useState<Boolean>(false);
+  const [generateFromImageHasSelected, setGenerateFromImageHasSelected] =
+    useState<Boolean>(false);
+
+  const [tags, setTags] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleTagInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const addTag = () => {
+    const tag = inputValue.trim();
+    console.log("create tag this tag", tag);
+    if (tag && !tags.includes(tag)) {
+      setTags([...tags, tag]);
+      setInputValue("");
+    }
+  };
+
+  const removeTag = (tag) => {
+    const newTags = tags.filter((t) => t !== tag);
+    setTags(newTags);
+  };
 
   useEffect(() => {
     // means question data is ready to get uploaded with imageurls
@@ -229,9 +256,8 @@ function UploadQuestion() {
     setExplanationText(e.target.value);
   };
 
-  return (
-    <div className={styles.page}>
-      <h1 style={{ margin: "45px 0px 2px 0px" }}></h1>
+  const customQuestionGenerator = (
+    <>
       <div className={styles.str2mdTable}>
         <div className={styles.tabs}>
           <div className={styles.strTab}>Question-text</div>
@@ -348,10 +374,70 @@ function UploadQuestion() {
         </div>
       </div>
 
-      {/* <TagInput className={styles.questionTags} /> */}
+      <TagInput
+        className={styles.questionTags}
+        tags={tags}
+        removeTag={removeTag}
+        inputValue={inputValue}
+        addTag={addTag}
+        handleInputChange={handleTagInputChange}
+      />
       <button className={styles.uploadButton} onClick={handleUploadQuestion}>
         Upload
       </button>
+    </>
+  );
+
+  const initialButtonGroup = (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <button
+        className={styles.uploadButton}
+        onClick={() => setGenerateCustomHasSelected(true)}
+      >
+        Custom
+      </button>
+      <button
+        className={styles.uploadButton}
+        onClick={() => setGenerateFromImageHasSelected(true)}
+      >
+        From Image
+      </button>
+      <button
+        className={styles.uploadButton}
+        onClick={() => setGenerateFromTextHasSelected(true)}
+      >
+        From Text
+      </button>
+    </div>
+  );
+
+  return (
+    <div className={styles.page}>
+      {(generateCustomHasSelected ||
+        generateFromTextHasSelected ||
+        generateFromImageHasSelected) && (
+        <Image
+          src={"/backArrow.png"}
+          width={20}
+          height={20}
+          style={{
+            cursor: "pointer",
+            position: "fixed",
+            left: "2rem",
+            top: "5rem",
+          }}
+          onClick={() => {
+            setGenerateFromTextHasSelected(false);
+            setGenerateCustomHasSelected(false);
+            setGenerateFromImageHasSelected(false);
+          }}
+        />
+      )}
+      {generateCustomHasSelected && customQuestionGenerator}
+      {!generateCustomHasSelected &&
+        !generateFromTextHasSelected &&
+        !generateFromImageHasSelected &&
+        initialButtonGroup}
     </div>
   );
 }

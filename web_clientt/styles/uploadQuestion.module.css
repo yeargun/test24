@@ -257,11 +257,8 @@
 }
 
 .questionTags {
-  position: absolute;
-  right: 5%;
-  width: 25%;
-  height: 30%;
-  top: 55%;
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
 .uploadButton {
@@ -310,36 +307,15 @@
   margin-bottom: 10px;
 }
 
-.choiceAndTrueFalseWrapper input[type="radio"] {
-  /* hide the default radio button appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  position: relative;
-  /* set the custom radio button size */
-  width: 20px;
-  height: 20px;
-  /* set the custom radio button border and background */
-  border: 2px solid rgba(0, 52, 137, 0.548); /* greenish border */
-  border-radius: 50%; /* make it circular */
-  background-color: transparent; /* make the center transparent */
-}
-
 .choiceAndTrueFalseWrapper input[type="radio"]:checked {
-  border: rgba(0, 52, 137, 0.438) solid 2px;
+  visibility: hidden;
+  margin: 0;
 }
 
-.choiceAndTrueFalseWrapper input[type="radio"]:checked::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 20px;
-  width: 20px;
-  background-color: rgba(0, 52, 137, 0.238); /* greenish circle */
-  border-radius: 50%; /* make it circular */
+.choiceAndTrueFalseWrapper input[type="radio"] {
+  visibility: hidden;
+  width: 0;
+  margin: 0;
 }
 
 /* ######*/
