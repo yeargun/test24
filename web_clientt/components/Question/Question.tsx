@@ -22,7 +22,7 @@ interface Question {
 function Question(props: Question) {
   return (
     <div className={styles.question}>
-      <ConceptSection concepts={props.concepts} />
+      {/* <ConceptSection concepts={props.concepts} /> */}
       <QuestionCard {...props} />
     </div>
   );

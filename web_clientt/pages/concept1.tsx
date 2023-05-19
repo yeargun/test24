@@ -64,14 +64,14 @@ function Test0() {
           }}
         />
       )}
-      <Image
+      {/* <Image
         className={styles.settingsIcon}
         src={"/settings-icon.png"}
         alt={"settings-icon"}
         width={50}
         height={50}
         onClick={handleSettingsButtonClick}
-      />
+      /> */}
     </div>
   );
 }

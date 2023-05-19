@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { ProtectRoute } from "components/ProtectRoute";
 import Cookies from "universal-cookie";
 import Image from "next/image";
+import MoreSettings from "components/MoreSettings";
 export const cookies = new Cookies();
 cookies.set("Access-Control-Allow-Credentials", true, { path: "/" });
 
@@ -16,6 +17,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <Provider store={store}>
       <ProtectRoute>
         {/* <Header /> */}
+        <MoreSettings />
         <div className={styles.searchWrapper}>
           <Image
             className={styles.searchIcon}
