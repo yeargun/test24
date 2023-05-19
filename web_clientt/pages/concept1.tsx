@@ -39,6 +39,7 @@ function Test0() {
   const handleSettingsButtonClick = () => {};
   return (
     <div className={styles.page}>
+      <h2 className={styles.progressPercent}>55.45</h2>
       <Question
         {...currentQuestion}
         isLoading={isLoading}

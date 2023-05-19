@@ -24,7 +24,7 @@ function MoreSettings() {
         <div className={styles.dropdown} onMouseLeave={() => toggleDropdown()}>
           <ul>
             <li>
-              <Link href="/concepts" onClick={() => toggleDropdown()}>
+              <Link href="/concept1" onClick={() => toggleDropdown()}>
                 Concepts
               </Link>
             </li>
