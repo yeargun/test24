@@ -40,7 +40,7 @@ function Login() {
       }
       setUsername("");
       setPassword("");
-      router.push("/concept1");
+      router.push("/concepts");
     } catch (err) {
       if (!err?.originalStatus) {
         // isloading: true until timeout occurs

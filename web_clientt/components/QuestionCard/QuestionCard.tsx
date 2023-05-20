@@ -73,17 +73,20 @@ function QuestionCard({
   );
 
   return (
-    <div className={styles.questionCard}>
-      {!isLoading && questionContent}
-      {!isLoading && (
-        <AnswerSection
-          choices={choices}
-          rightChoiceId={rightChoiceId}
-          questionId={questionId}
-        />
-      )}
+    <>
       {isLoading && <div className={styles.loader}></div>}
-    </div>
+
+      {!isLoading && (
+        <div className={styles.questionCard}>
+          {questionContent}
+          <AnswerSection
+            choices={choices}
+            rightChoiceId={rightChoiceId}
+            questionId={questionId}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

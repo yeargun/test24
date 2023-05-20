@@ -3,21 +3,8 @@
   /* position: fixed; */
   padding: 0 3vw 3vh 3vw;
   /* min-height: 100vh; */
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-.progressPercent {
-  position: fixed;
-  top: 0;
-  margin: 0.5rem;
-  left: 50%;
-  padding: 0.3rem;
-  border-radius: 0.5rem;
-  transform: translateX(-50%);
-  border: 1px solid rgba(128, 128, 128, 0.356);
-  background-color: rgba(226, 226, 226, 0.349);
-  user-select: none;
+  /* min-width: 100vw;
+  min-height: 100vh; */
 }
 
 .settingsIcon {
@@ -27,7 +14,6 @@
 }
 
 .nextQuestionButton {
-  /* TODO: yeargun, submit butonu pozisyonu soru widthine göre sekillenmiyo */
   position: fixed;
   right: 5vh;
   top: 50%;
@@ -37,23 +23,32 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
-  border: 0.1vh solid black;
-
   width: 10vh;
   height: 4vh;
 
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 
-  background-color: #edecec;
+  background-color: black;
+  border: 0.1rem solid #333;
+  color: white;
+  padding: 0.5rem 0.1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 10px 2px rgb(193, 193, 193), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+.nextQuestionButton:hover {
+  background-color: #333;
+}
 
-  /* animation: ripple 1s; */
+.nextQuestionButton:focus,
+.nextQuestionButton:active {
+  outline: none;
+  box-shadow: 0 0 0.5rem 0.1rem #333;
+  border-color: #999;
+  animation: border-color-cycle 1s ease-in-out infinite;
+}
+
+.nextQuestionButton:active {
+  transform: translateY(-50%) scale(0.92);
 }

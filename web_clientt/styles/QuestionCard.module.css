@@ -127,14 +127,14 @@
 }
 
 .loader {
-  position: inherit;
+  position: fixed;
   display: inline-block;
-  left: 40%;
-  top: 40%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 
   border: 16px solid #d5d5d5; /* Light grey */
-  border-top: 16px solid #828282; /* Blue */
+  border-top: 16px solid #000000; /* Blue */
   border-radius: 50%;
   width: 100px;
   height: 100px;

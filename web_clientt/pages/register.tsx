@@ -39,7 +39,7 @@ function Register() {
       if (typeof window !== "undefined") {
         localStorage.setItem("username", username);
       }
-      router.push("/concept1");
+      router.push("/concepts");
     } catch (err) {
       if (!err?.originalStatus) {
         // isloading: true until timeout occurs

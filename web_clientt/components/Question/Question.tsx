@@ -23,6 +23,8 @@ function Question(props: Question) {
   return (
     <div className={styles.question}>
       {/* <ConceptSection concepts={props.concepts} /> */}
+      <h4 className={styles.progressPercent}>55.45</h4>
+
       <QuestionCard {...props} />
     </div>
   );

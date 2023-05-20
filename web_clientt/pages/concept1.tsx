@@ -36,10 +36,8 @@ function Test0() {
     fetchNextQuestion();
   }, [dispatch]);
 
-  const handleSettingsButtonClick = () => {};
   return (
     <div className={styles.page}>
-      <h4 className={styles.progressPercent}>55.45</h4>
       <Question
         {...currentQuestion}
         isLoading={isLoading}
@@ -64,14 +62,6 @@ function Test0() {
           }}
         />
       )}
-      {/* <Image
-        className={styles.settingsIcon}
-        src={"/settings-icon.png"}
-        alt={"settings-icon"}
-        width={50}
-        height={50}
-        onClick={handleSettingsButtonClick}
-      /> */}
     </div>
   );
 }
