@@ -27,7 +27,7 @@ const authSlice = createSlice({
 
 export const { setCredentials, logOut, setUnauthorized } = authSlice.actions;
 export default authSlice.reducer;
-export const isUnauthorized = (state) => state.auth.unauthorized;
+export const isUnauthorizedState = (state) => state.auth.unauthorized;
 
 // export const selectCurrentUser = (state) => state.auth.username;
 // export const selectCurrentToken = (state) => state.auth.token;

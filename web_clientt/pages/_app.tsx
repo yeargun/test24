@@ -9,6 +9,7 @@ import { ProtectRoute } from "components/ProtectRoute";
 import Cookies from "universal-cookie";
 import Image from "next/image";
 import MoreSettings from "components/MoreSettings";
+import SearchBar from "components/SearchBar";
 export const cookies = new Cookies();
 cookies.set("Access-Control-Allow-Credentials", true, { path: "/" });
 
@@ -18,20 +19,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <ProtectRoute>
         {/* <Header /> */}
         <MoreSettings />
-        <div className={styles.searchWrapper}>
-          <Image
-            className={styles.searchIcon}
-            width={20}
-            height={20}
-            src={"/searchIcon.png"}
-            alt={"xd"}
-          />
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search"
-          />
-        </div>
+        <SearchBar />
         <Component {...pageProps} />
       </ProtectRoute>
     </Provider>
