@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stuf
+spec:
+  selector:
+    app: stuf
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+

@@ -1,20 +1,16 @@
 spring:
-#  data:
-#    mongodb:
-#      uri: mongodb://localhost:27017/questions
-##      authentication-database: admin
-##      username: rootuser
-##      password: rootpass
-#      database: questions
-#      port: 27017
-#      host: localhost
 
 #  MYSQL
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yeargun
+    url: jdbc:mysql://34.76.27.208/yeargun
     username: root
-    password: pass
+
+
+#    url: jdbc:mysql://${DB_HOST}/${DB_NAME}?useSSL=false
+#    #    mysql://${DB_HOST}/${DB_NAME}?useSSL=false
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,4 +18,4 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect

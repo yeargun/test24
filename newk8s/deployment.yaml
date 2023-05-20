@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stuf
+spec:
+  selector:
+    matchLabels:
+      app: stuf
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stuf
+    spec:
+      containers:
+        - name: stuf1-java
+          image: stuf1-java-t
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8080
+          env:  
+            - name: DB_HOST  
+              value: mysql
+            - name: DB_NAME  
+              value: yeargun
+            - name: DB_USERNAME 
+              value: root
+            - name: DB_PASSWORD
+              value: pass
+
+---

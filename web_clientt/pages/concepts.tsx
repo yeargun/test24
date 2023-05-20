@@ -18,7 +18,7 @@ interface Question {
   questionId: string | undefined;
 }
 
-function Test0() {
+function concepts() {
   const [getNextQuestion, { isLoading }] = useGetNextQuestionMutation();
   // const [nextQuestion, setNextQuestion] = useState({});
 
@@ -39,7 +39,7 @@ function Test0() {
   const handleSettingsButtonClick = () => {};
   return (
     <div className={styles.page}>
-      <h4 className={styles.progressPercent}>55.45</h4>
+      <h2 className={styles.progressPercent}>55.45</h2>
       <Question
         {...currentQuestion}
         isLoading={isLoading}
@@ -50,6 +50,7 @@ function Test0() {
           "SQL",
         ]}
         explanation={explanation}
+        // imageUrl="https://www.w3schools.com/howto/img_avatar2.png"
       />
       {(rightChoiceId || rightChoiceId == 0) && (
         <input
@@ -76,4 +77,4 @@ function Test0() {
   );
 }
 
-export default Test0;
+export default concepts;
