@@ -15,17 +15,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="Like_Comment")
-public class LikeComment {
-    // write and read must be fast
+@Table(name="Tag")
+public class Tag {
+    // high read. alot.
+    // slow write is totaly ok
+
     @Id
-    @GeneratedValue
-    private Integer id;
+    private String id;
 
-    // user
-    // post (thing)
 
-    // like/unlike
-    // this and that maybe use procedures and jdbc
 
 }

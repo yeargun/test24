@@ -16,7 +16,8 @@ import java.util.List;
 @Builder
 @Table(name="Question")
 public class Question {
-
+    // read priority
+    // slow write is ok
 
     @Id
     @GeneratedValue

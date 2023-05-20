@@ -1,33 +1,38 @@
 package com.yeargun.questionservice.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="UserAnswer")
-public class UserAnswer {
-    // prob NOSQL is better
-    // no1 gives a shit on acid
-    // yet, also sql is ok bcs we dotn need to store it instantenously
-
+@Table(name="ConceptProgress")
+public class ConceptProgress {
     @Id
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    // mysql decimal
+    // man use jdbc procedures etc then :/
+    private int progress;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
-    private Question question;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tag_id")
+    private Set<Tag> tag;
 
     private int answer;
+
+
 }
