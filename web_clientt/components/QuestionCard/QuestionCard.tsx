@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm";
 interface QuestionCard {
   questionText: string;
   //cdn man :ok:
-  imageUrl: string;
+  imageURLs: string[] | undefined;
   choices: string[];
   rightChoiceId: number | undefined;
   questionId: string | undefined;
@@ -24,7 +24,7 @@ interface QuestionCard {
 
 function QuestionCard({
   questionText: questionText,
-  imageUrl: imageUrl,
+  imageURLs: imageURLs,
   choices: choices,
   rightChoiceId: rightChoiceId,
   questionId: questionId,
@@ -48,6 +48,23 @@ function QuestionCard({
     </>
   );
 
+  // must get alttext
+  const imageContent = imageURLs && (
+    <div className={styles.imageWrapper}>
+      {imageURLs.map((imageURL, ind) => (
+        <Image
+          key={ind}
+          draggable={false}
+          className={styles.image}
+          src={imageURL}
+          alt={"interesting question"}
+          height={300}
+          width={300}
+        />
+      ))}
+    </div>
+  );
+
   const questionContent = (
     <>
       {answerExplanationComponent}
@@ -59,16 +76,7 @@ function QuestionCard({
           {questionText}
         </ReactMarkdown>
       </div>
-      <div className={styles.imageWrapper}>
-        <Image
-          draggable={false}
-          className={styles.image}
-          src={imageUrl}
-          alt={"interesting question"}
-          height={300}
-          width={300}
-        />
-      </div>
+      {imageContent}
     </>
   );
 

@@ -21,7 +21,7 @@ public class ConceptProgress {
     private Integer id;
 
     // mysql decimal
-    // man use jdbc procedures etc then :/
+    // man use jdbc procedures etc then :/ f
     private int progress;
 
     @OneToOne(fetch = FetchType.LAZY)

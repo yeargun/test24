@@ -35,7 +35,8 @@ public class QuestionService {
                         question.getId(),
                         question.getQuestionText(),
                         question.getChoices(),
-                        question.getConcepts()
+                        question.getConcepts(),
+                        question.getImageURLs()
                 )).collect(Collectors.toList())
                 .get(0));
 

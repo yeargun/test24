@@ -8,6 +8,7 @@ const questionSlice = createSlice({
     questionId: undefined,
     questionText: undefined,
     choices: undefined,
+    imageURLs: undefined,
     concepts: undefined,
   },
   reducers: {
@@ -16,7 +17,8 @@ const questionSlice = createSlice({
       state.choices = action.payload.choices;
       state.questionText = action.payload.questionText;
       state.questionId = action.payload.id;
-      state.explanation = undefined;
+      state.explanation = action.payload.explanation;
+      state.imageURLs = action.payload.imageURLs;
       state.rightChoiceId = undefined;
     },
     // ####

@@ -11,8 +11,8 @@ import {
 import { selectQuestion } from "features/question/questionSlice";
 interface Question {
   questionText: string;
-  //cdn man :ok:
-  imageUrl: string;
+  //cdn  :ok:
+  imageURLs: string[] | undefined;
   choices: string[];
   concepts: string[];
   questionId: string | undefined;
